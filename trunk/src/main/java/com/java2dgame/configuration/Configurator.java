@@ -15,49 +15,60 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.java2dgame.app.Application;
-
 public abstract class Configurator {
 
 	private static final int DEFAULT_WIDTH = 640;
 	private static final int DEFAULT_HEIGHT = 480;
+	private static final String CONFIGURATION_FILE = "configuration.xml";
+	
+	private static Document configDoc;
+	
+	public static void loadConfigurationFile() {
+		
+		try {
+			Logger.getLogger(Configurator.class).info("Loading "+CONFIGURATION_FILE);
+			
+			File fXmlFile = new File(Configurator.class.getResource(CONFIGURATION_FILE).getPath());
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			configDoc = dBuilder.parse(fXmlFile);
+			configDoc.getDocumentElement().normalize();
+			
+			Logger.getLogger(Configurator.class).info(CONFIGURATION_FILE+" was loaded correctly");
+
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+			Logger.getLogger(Configurator.class).error("ParserConfigurationException.");
+		} catch (SAXException e) {
+			e.printStackTrace();
+			Logger.getLogger(Configurator.class).error("SAXException.");
+		} catch (IOException e) {
+			e.printStackTrace();
+			Logger.getLogger(Configurator.class).error("IOException.");
+		} 
+	}
 
 	public static Dimension getConfigurationResolution() {
 		
 		Dimension returnDimension = new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT);
-		
+
 		try {
 
-			File fXmlFile = new File(Configurator.class.getResource("configuration.xml").getPath());
-			
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-			doc.getDocumentElement().normalize();
-			
-			NodeList nList = doc.getElementsByTagName("window");
+			NodeList nList = configDoc.getElementsByTagName("window");
 			Node nNode = nList.item(0);
-			
+
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				returnDimension.width = Integer.parseInt(getTagValue("width", eElement));
 				returnDimension.height = Integer.parseInt(getTagValue("height", eElement));
 			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			Logger.getLogger(Configurator.class).error("There was an error.");
+		}
 
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-			Logger.getLogger(Application.class).error("ParserConfigurationException");
-		} catch (SAXException e) {
-			e.printStackTrace();
-			Logger.getLogger(Application.class).error("SAXException");
-		} catch (IOException e) {
-			e.printStackTrace();
-			Logger.getLogger(Application.class).error("IOException");
-		} 
+		Logger.getLogger(Configurator.class).info("Width="+(int)returnDimension.getWidth()+",Height="+(int)returnDimension.getWidth());
 
-		Logger.getLogger(Application.class).info("Width="+(int)returnDimension.getWidth()+",Height="+(int)returnDimension.getWidth());
-		
 		return returnDimension;
 	}
 
