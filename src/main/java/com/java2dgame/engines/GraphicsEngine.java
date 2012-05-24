@@ -11,25 +11,19 @@ public final class GraphicsEngine{
 	
 	private static Vector<Drawable> drawableObjects = new Vector<Drawable>();
 	
-	private GraphicsEngine(){
-		
+	private GraphicsEngine(){}
+	
+	public static void update(Graphics bufferGraphicsIn,int width, int height){
+
+		Graphics2D bufferGraphics = (Graphics2D)bufferGraphicsIn;
+		bufferGraphics.setBackground(Color.black);
+		bufferGraphics.clearRect(0, 0, width, height);
+		renderObjects(bufferGraphics);
 	}
 	
-	public static void update(Graphics g){
-		Graphics2D graphics = (Graphics2D)g;
-		graphics.setBackground(Color.black);
-		
-		int resolutionWidth = (int)graphics.getClipBounds().getWidth();
-		int resolutionHeight = (int)graphics.getClipBounds().getHeight();
-		graphics.clearRect(0, 0, resolutionWidth, resolutionHeight);
-		
-		//TODO change this to support double buffering
-		renderObjects(graphics);
-	}
-	
-	private static void renderObjects(Graphics2D graphics) {
+	private static void renderObjects(Graphics2D bufferGraphics) {
 		for(Drawable object : drawableObjects){
-			graphics.drawImage(object.getImage(), object.getScreenlocationX(), object.getScreenlocationY(), null);
+			bufferGraphics.drawImage(object.getImage(), object.getScreenlocationX(), object.getScreenlocationY(), null);
 		}	
 	}
 
