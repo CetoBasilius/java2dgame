@@ -1,6 +1,5 @@
 package com.java2dgame.app;
 
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -9,13 +8,13 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.java2dgame.configuration.Configurator;
-import com.java2dgame.engines.GraphicsEngine;
 import com.java2dgame.engines.InputEngine;
 
 public class Application extends JFrame implements MouseMotionListener, KeyListener, MouseListener, MouseWheelListener{
@@ -45,10 +44,16 @@ public class Application extends JFrame implements MouseMotionListener, KeyListe
 	}
 
 	private void initWindow() {
+		GameCanvas gameCanvas = new GameCanvas();
+		gameCanvas.setPreferredSize(Configurator.getConfigurationResolution());
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(this.getClass().getSimpleName()+" "+serialVersionUID);
-		this.setSize(Configurator.getConfigurationResolution());
+		this.add(gameCanvas);
+		this.pack();
+		this.validate();
 		this.setVisible(true);
+		
 	}
 
 	private void initLogger() {
@@ -60,16 +65,6 @@ public class Application extends JFrame implements MouseMotionListener, KeyListe
 		new Application();
 	}
 	
-	@Override
-	public void paint(Graphics g){
-		GraphicsEngine.update(g);
-	}
-	
-	@Override
-	public void update(Graphics g){
-		paint(g);
-	}
-
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent arg0) {
 		

@@ -15,7 +15,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public abstract class Configurator {
+public final class Configurator {
 
 	private static final int DEFAULT_WIDTH = 640;
 	private static final int DEFAULT_HEIGHT = 480;
@@ -23,15 +23,24 @@ public abstract class Configurator {
 	
 	private static Document configDoc;
 	
+	private Configurator(){
+		
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException{
+		throw new CloneNotSupportedException();
+	}
+	
 	public static void loadConfigurationFile() {
 		
 		try {
 			Logger.getLogger(Configurator.class).info("Loading "+CONFIGURATION_FILE);
 			
-			File fXmlFile = new File(Configurator.class.getResource(CONFIGURATION_FILE).getPath());
+			File xmlFile = new File(Configurator.class.getResource(CONFIGURATION_FILE).getPath());
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			configDoc = dBuilder.parse(fXmlFile);
+			configDoc = dBuilder.parse(xmlFile);
 			configDoc.getDocumentElement().normalize();
 			
 			Logger.getLogger(Configurator.class).info(CONFIGURATION_FILE+" was loaded correctly");
@@ -67,7 +76,7 @@ public abstract class Configurator {
 			Logger.getLogger(Configurator.class).error("There was an error.");
 		}
 
-		Logger.getLogger(Configurator.class).info("Width="+(int)returnDimension.getWidth()+",Height="+(int)returnDimension.getWidth());
+		Logger.getLogger(Configurator.class).info("Width="+(int)returnDimension.getWidth()+",Height="+(int)returnDimension.getHeight());
 
 		return returnDimension;
 	}
