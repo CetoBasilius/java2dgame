@@ -2,7 +2,7 @@ package com.java2dgame.engines;
 
 import java.awt.event.KeyEvent;
 
-public abstract class InputEngine {
+public final class InputEngine {
 	
 	public static enum RecorderState { OFF, RECORDING, PLAYBACK }
 	
@@ -18,10 +18,26 @@ public abstract class InputEngine {
 	
 	private static final int CHAT_KEY_CODE = KeyEvent.VK_ENTER;
 
-	private static InputEngineController inputController;
-	public static InputRecorder inputRecorder;
-
+	private InputEngineController inputController = new InputEngineController();
+	private InputRecorder inputRecorder = new InputRecorder();
 	
+	private static class InputEngineReferenceHolder {
+        private static final InputEngine INSTANCE = new InputEngine();
+    }
+	
+	private InputEngine(){
+		
+	}
+	
+	public static InputEngine getInstance() {
+        return InputEngineReferenceHolder.INSTANCE;
+    }
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException{
+		throw new CloneNotSupportedException();
+	}
+    
 	public void update(){
 		inputController = inputRecorder.update(inputController);
 
@@ -33,7 +49,7 @@ public abstract class InputEngine {
 
 	}
 
-	public static void pressKey(int keyCode){
+	public void pressKey(int keyCode){
 		switch(keyCode){
 		case UP_KEY_CODE:{
 			inputController.holdingUpKey=true;
@@ -86,7 +102,7 @@ public abstract class InputEngine {
 		}
 	}
 	
-	public static void releaseKey(int keyCode){
+	public void releaseKey(int keyCode){
 		switch(keyCode){
 		case UP_KEY_CODE:{
 			inputController.holdingUpKey=false;
@@ -249,7 +265,7 @@ public abstract class InputEngine {
 		return false;
 	}
 	
-	public class InputRecorder{
+	private class InputRecorder{
 		private boolean recorderIsFull = false;
 		private int currentPlayBackPosition = 0;
 		private int savedPlayBackPosition = 0;
