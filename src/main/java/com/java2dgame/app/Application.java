@@ -1,5 +1,6 @@
 package com.java2dgame.app;
 
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -14,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.java2dgame.configuration.Configurator;
+import com.java2dgame.engines.GraphicsEngine;
 import com.java2dgame.engines.InputEngine;
 
 public class Application extends JFrame implements MouseMotionListener, KeyListener, MouseListener, MouseWheelListener{
@@ -57,6 +59,16 @@ public class Application extends JFrame implements MouseMotionListener, KeyListe
 	public static void main(String [] args) {
 		new Application();
 	}
+	
+	@Override
+	public void paint(Graphics g){
+		GraphicsEngine.update(g);
+	}
+	
+	@Override
+	public void update(Graphics g){
+		paint(g);
+	}
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent arg0) {
@@ -90,12 +102,12 @@ public class Application extends JFrame implements MouseMotionListener, KeyListe
 
 	@Override
 	public void keyPressed(KeyEvent key) {	
-		InputEngine.pressKey(key.getKeyCode());
+		InputEngine.getInstance().pressKey(key.getKeyCode());
 	}
 
 	@Override
 	public void keyReleased(KeyEvent key) {
-		InputEngine.releaseKey(key.getKeyCode());
+		InputEngine.getInstance().releaseKey(key.getKeyCode());
 	}
 
 	@Override
