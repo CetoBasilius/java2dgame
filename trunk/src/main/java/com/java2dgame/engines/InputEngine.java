@@ -2,6 +2,8 @@ package com.java2dgame.engines;
 
 import java.awt.event.KeyEvent;
 
+import org.apache.log4j.Logger;
+
 public final class InputEngine {
 	
 	public static enum RecorderState { OFF, RECORDING, PLAYBACK }
@@ -26,7 +28,7 @@ public final class InputEngine {
     }
 	
 	private InputEngine(){
-		
+		Logger.getLogger(this.getClass()).info("Input engine started");
 	}
 	
 	public static InputEngine getInstance() {
@@ -265,7 +267,7 @@ public final class InputEngine {
 		return false;
 	}
 	
-	private class InputRecorder{
+	public class InputRecorder{
 		private boolean recorderIsFull = false;
 		private int currentPlayBackPosition = 0;
 		private int savedPlayBackPosition = 0;

@@ -8,7 +8,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import org.apache.log4j.Logger;
@@ -29,7 +28,7 @@ public class Application extends JFrame implements MouseMotionListener, KeyListe
 		initLogger();
 		initConfiguration();
 		initWindow();
-		addInputListeners();
+		addInputListeners();	
 	}
 
 	private void initConfiguration() {
@@ -54,11 +53,13 @@ public class Application extends JFrame implements MouseMotionListener, KeyListe
 		this.validate();
 		this.setVisible(true);
 		
+		gameCanvas.createBufferGraphics();
+		
 	}
 
 	private void initLogger() {
 		PropertyConfigurator.configure(getClass().getResource("log4j.properties"));
-		Logger.getLogger(Application.class).info("Logger started");
+		Logger.getLogger(this.getClass()).info("Logger started");
 	}
 
 	public static void main(String [] args) {
