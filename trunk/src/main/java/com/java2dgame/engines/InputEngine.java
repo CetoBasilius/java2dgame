@@ -28,7 +28,7 @@ public final class InputEngine {
     }
 	
 	private InputEngine(){
-		Logger.getLogger(this.getClass()).info("Input engine started");
+		Logger.getLogger(this.getClass()).info("Input engine started.");
 	}
 	
 	public static InputEngine getInstance() {
