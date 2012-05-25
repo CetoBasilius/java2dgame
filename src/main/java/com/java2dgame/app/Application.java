@@ -29,6 +29,7 @@ public class Application extends JFrame implements MouseMotionListener, KeyListe
 		initConfiguration();
 		initWindow();
 		addInputListeners();	
+		Game.startGame();
 	}
 
 	private void initConfiguration() {

@@ -36,7 +36,7 @@ public class GameCanvas extends JPanel implements Runnable{
 	}
 
 	private void startPaintingThread() {
-		Thread painter = new Thread(null,this,this.getClass().getSimpleName());
+		Thread painter = new Thread(null,this,"Canvas");
 		painter.start();
 	}
 	

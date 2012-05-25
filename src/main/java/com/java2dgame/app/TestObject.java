@@ -7,6 +7,7 @@ public class TestObject implements Drawable{
 	private int assignedIndex;
 	private int screenLocationX;
 	private int screenLocationY;
+	private Image image;
 	
 
 	@Override
@@ -21,7 +22,7 @@ public class TestObject implements Drawable{
 
 	@Override
 	public Image getImage() {
-		return null;
+		return image;
 	}
 
 	@Override
