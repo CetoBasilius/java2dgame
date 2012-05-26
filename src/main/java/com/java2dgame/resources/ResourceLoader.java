@@ -37,7 +37,6 @@ public final class ResourceLoader {
 	
 	
 	public void getImages() {
-		
 		try {
 
 			NodeList nList = resourceList.getElementsByTagName("images");
@@ -48,7 +47,8 @@ public final class ResourceLoader {
 				int numberOfImages = XMLHelper.getTagAmount("image", eElement);
 				Logger.getLogger(ResourceLoader.class).info(("There are "+numberOfImages+" images to load."));
 				for(int a = 0;a<numberOfImages;a++) {
-					System.out.println(XMLHelper.getTagValue("image", eElement,a));
+					//TODO actually load images here
+					XMLHelper.getTagValue("image", eElement,a);
 				}
 			}
 
