@@ -53,9 +53,9 @@ public class Application extends JFrame implements MouseMotionListener, KeyListe
 		this.pack();
 		this.validate();
 		this.setVisible(true);
+		this.setResizable(false);
 		
 		gameCanvas.createBufferGraphics();
-		
 	}
 
 	private void initLogger() {

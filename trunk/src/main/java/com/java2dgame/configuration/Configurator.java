@@ -42,7 +42,7 @@ public final class Configurator {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			Logger.getLogger(Configurator.class).error("There was an error.");
+			Logger.getLogger(Configurator.class).warn("There was an error. default values will be used.");
 		}
 
 		Logger.getLogger(Configurator.class).info("Width="+(int)returnDimension.getWidth()+",Height="+(int)returnDimension.getHeight());

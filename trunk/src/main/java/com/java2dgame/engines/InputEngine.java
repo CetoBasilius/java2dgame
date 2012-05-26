@@ -22,6 +22,7 @@ public final class InputEngine {
 
 	private InputEngineController inputController = new InputEngineController();
 	private InputRecorder inputRecorder = new InputRecorder();
+	//private Controllable controllable;
 	
 	private static class InputEngineReferenceHolder {
         private static final InputEngine INSTANCE = new InputEngine();
@@ -267,6 +268,20 @@ public final class InputEngine {
 		return false;
 	}
 	
+	
+	//TODO add controllable and control this object with an interface
+//	public void removeControllable() {
+//		this.controllable = null;
+//	}
+//	
+//	public Controllable getControllable() {
+//		return controllable;
+//	}
+//
+//	public void setControllable(Controllable controllable) {
+//		this.controllable = controllable;
+//	}
+
 	public class InputRecorder{
 		private boolean recorderIsFull = false;
 		private int currentPlayBackPosition = 0;

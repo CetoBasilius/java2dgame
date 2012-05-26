@@ -9,6 +9,10 @@ public class TestObject implements Drawable{
 	private int screenLocationY;
 	private Image image;
 	
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
 
 	@Override
 	public int getAssignedIndex() {

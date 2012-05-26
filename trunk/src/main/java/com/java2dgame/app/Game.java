@@ -1,7 +1,10 @@
 package com.java2dgame.app;
 
+import java.awt.Toolkit;
+
 import org.apache.log4j.Logger;
 
+import com.java2dgame.engines.GraphicsEngine;
 import com.java2dgame.engines.InputEngine;
 import com.java2dgame.resources.ResourceLoader;
 
@@ -32,7 +35,15 @@ public final class Game implements Runnable{
 		//TODO initialize game stuff here
 		ResourceLoader.getInstance().getImages();
 		
+		testGraphicsObjectPool();
+		
 		gameLoop();
+	}
+
+	private void testGraphicsObjectPool() {
+		TestObject object = new TestObject();
+		object.setImage(Toolkit.getDefaultToolkit().getImage(ResourceLoader.class.getResource("testimage.jpg")));
+		GraphicsEngine.addDrawableObject(object);
 	}
 	
 	private void gameLoop(){

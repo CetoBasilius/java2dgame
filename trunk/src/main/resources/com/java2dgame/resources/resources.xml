@@ -1,8 +1,21 @@
 <?xml version="1.0"?>
 <resources>
 	<images>
+		<folder>images</folder>
 		<image>dirt1.jpg</image>
 		<image>dirt2.jpg</image>
 		<image>dirt3.jpg</image>
 	</images>
+	<animated>
+		<folder>animated</folder>
+		<image>animated1.jpg</image>
+		<image>animated2.jpg</image>
+		<image>animated3.jpg</image>
+	</animated>
+	<sounds>
+		<folder>sounds</folder>
+		<sound>sound1.wav</sound>
+		<sound>sound2.wav</sound>
+		<sound>sound3.wav</sound>
+	</sounds>
 </resources>

@@ -41,24 +41,17 @@ public final class ResourceLoader {
 		try {
 
 			NodeList nList = resourceList.getElementsByTagName("images");
-			
-			
-			//TODO iterate through all of the items and store them in a URL or load them directly
 			Node nNode = nList.item(0);
-			
-			//TODO this is a test space where anything can change 
-			
-			
 
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
-				
-				Logger.getLogger(ResourceLoader.class).error("There are "+eElement.getChildNodes().getLength()+" images to load");
-				
-				//System.out.println(XMLHelper.getTagValue("image", eElement,1));
-				
+				int numberOfImages = XMLHelper.getTagAmount("image", eElement);
+				Logger.getLogger(ResourceLoader.class).info(("There are "+numberOfImages+" images to load."));
+				for(int a = 0;a<numberOfImages;a++) {
+					System.out.println(XMLHelper.getTagValue("image", eElement,a));
+				}
 			}
-			
+
 		}catch(Exception e) {
 			e.printStackTrace();
 			Logger.getLogger(ResourceLoader.class).error("There was an error.");
