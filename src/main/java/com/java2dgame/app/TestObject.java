@@ -1,19 +1,60 @@
 package com.java2dgame.app;
 
+import java.awt.Dimension;
 import java.awt.Image;
 
-public class TestObject implements Drawable, Controllable{
+import com.java2dgame.engines.Collisionable;
+
+public class TestObject implements Drawable, Controllable, Collisionable{
 	
 	private int assignedIndex;
 	private int screenLocationX;
 	private int screenLocationY;
 	private Image image;
 	
+	private Dimension size = new Dimension(1,1);
+	private float worldPositionX;
+	private float worldPositionY;
+	
 	private float horizontalVelocity;
 	private float verticalVelocity;
 	
 	public void setImage(Image image) {
 		this.image = image;
+	}
+	
+	@Override
+	public void setSize(int width, int height) {
+		size.width = width;
+		size.height = height;
+	}
+
+	@Override
+	public void setWorldPosition(int x, int y) {
+		worldPositionX = x;
+		worldPositionY = y;
+	}
+	
+	@Override
+	public float getWorldPositionX() {
+		return worldPositionX;
+	}
+
+	@Override
+	public float getWorldPositionY() {
+		return worldPositionY;
+	}
+
+
+	@Override
+	public float getSizeWidth() {
+		return size.width;
+	}
+
+
+	@Override
+	public float getSizeHeight() {
+		return size.height;
 	}
 	
 
@@ -70,8 +111,12 @@ public class TestObject implements Drawable, Controllable{
 		 * that the screen Y coordinate 
 		 * system is flipped.
 		 */
-		screenLocationX += horizontalVelocity ;
-		screenLocationY -= verticalVelocity;	
+		
+		worldPositionX += horizontalVelocity;
+		worldPositionY -= verticalVelocity;
+		
+		screenLocationX = (int) worldPositionX;
+		screenLocationY = (int) worldPositionY;
 	}
 
 
@@ -182,5 +227,6 @@ public class TestObject implements Drawable, Controllable{
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+
 }
