@@ -1,6 +1,6 @@
 package com.java2dgame.helpers;
 
-import java.io.File;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,15 +17,17 @@ public class XMLHelper {
 		Document returnDocument = null;
 		try {
 			Logger.getLogger(XMLHelper.class).info("Loading "+fileName);
-
-			File xmlFile = new File(classCaller.getResource(fileName).getPath());
+			
+			InputStream xmlStream = classCaller.getResourceAsStream(fileName);
+			
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			returnDocument = dBuilder.parse(xmlFile);
+			returnDocument = dBuilder.parse(xmlStream);
 			returnDocument.getDocumentElement().normalize();
 
 			Logger.getLogger(XMLHelper.class).info(fileName+" was loaded correctly");
 		} catch (Exception e) {
+			e.printStackTrace();
 			Logger.getLogger(XMLHelper.class).error("Could not find "+fileName);
 		}
 		return returnDocument; 
