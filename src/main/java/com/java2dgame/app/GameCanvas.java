@@ -55,7 +55,7 @@ public class GameCanvas extends JPanel implements Runnable{
 	public void paint(Graphics graphics){
 		graphics.clearRect(0, 0, preferredSize.width, preferredSize.height);
 		if(bufferGraphics != null){
-			GraphicsEngine.update(bufferGraphics, preferredSize.width, preferredSize.height);
+			GraphicsEngine.getInstance().update(bufferGraphics, preferredSize.width, preferredSize.height);
 			bufferGraphics.setColor(Color.white);
 			bufferGraphics.drawString(String.valueOf(getFPS()), 20, 20);
 		}

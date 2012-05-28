@@ -39,4 +39,8 @@ public class TestObject implements Drawable{
 		return screenLocationX;
 	}
 
+	public void setScreenLocation(int x, int y) {
+		this.screenLocationX = x;
+		this.screenLocationY = y;
+	}
 }
