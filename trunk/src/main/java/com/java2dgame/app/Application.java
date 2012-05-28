@@ -1,5 +1,6 @@
 package com.java2dgame.app;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -13,7 +14,9 @@ import javax.swing.JFrame;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import com.java2dgame.adapters.FullScreenCombinationAdapter;
 import com.java2dgame.configuration.Configurator;
+import com.java2dgame.engines.GraphicsEngine;
 import com.java2dgame.engines.InputEngine;
 
 public class Application extends JFrame implements MouseMotionListener, KeyListener, MouseListener, MouseWheelListener{
@@ -41,21 +44,30 @@ public class Application extends JFrame implements MouseMotionListener, KeyListe
 		addKeyListener(this);
 		addMouseListener(this); 
 		addMouseWheelListener(this);
+		
 	}
 
 	private void initWindow() {
 		GameCanvas gameCanvas = new GameCanvas();
 		gameCanvas.setPreferredSize(Configurator.getConfigurationResolution());
 		
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(this.getClass().getSimpleName()+" "+serialVersionUID);
 		this.add(gameCanvas);
 		this.pack();
 		this.validate();
+		this.setLayout(null);
+		this.getContentPane().setBackground(Color.darkGray);
 		this.setVisible(true);
 		this.setResizable(false);
 		
 		gameCanvas.createBufferGraphics();
+		gameCanvas.addKeyListener(new FullScreenCombinationAdapter());
+	
+		GraphicsEngine.getInstance().setWindowReference(this, gameCanvas, gameCanvas.getPreferredSize());
+		GraphicsEngine.getInstance().resetWindow();
+
 	}
 
 	private void initLogger() {
