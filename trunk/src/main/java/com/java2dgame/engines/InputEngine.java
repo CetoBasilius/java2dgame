@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 
 import org.apache.log4j.Logger;
 
+import com.java2dgame.app.Controllable;
+
 public final class InputEngine {
 	
 	public static enum RecorderState { OFF, RECORDING, PLAYBACK }
@@ -22,7 +24,7 @@ public final class InputEngine {
 
 	private InputEngineController inputController = new InputEngineController();
 	private InputRecorder inputRecorder = new InputRecorder();
-	//private Controllable controllable;
+	private Controllable controllable;
 	
 	private static class InputEngineReferenceHolder {
         private static final InputEngine INSTANCE = new InputEngine();
@@ -44,10 +46,10 @@ public final class InputEngine {
 	public void update(){
 		inputController = inputRecorder.update(inputController);
 
-//		if(isHoldingUpKey()){}
-//		if(isHoldingDownKey()){}
-//		if(isHoldingRightKey()){}
-//		if(isHoldingLeftKey()){}
+		if(isHoldingUpKey()){controllable.holdingUp();}
+		if(isHoldingDownKey()){controllable.holdingDown();}
+		if(isHoldingRightKey()){controllable.holdingRight();}
+		if(isHoldingLeftKey()){controllable.holdingLeft();}
 //-------------------------------THIS IS ENTIRELY EXPERIMENTAL--------------------------------------------------
 
 	}
@@ -270,17 +272,17 @@ public final class InputEngine {
 	
 	
 	//TODO add controllable and control this object with an interface
-//	public void removeControllable() {
-//		this.controllable = null;
-//	}
-//	
-//	public Controllable getControllable() {
-//		return controllable;
-//	}
-//
-//	public void setControllable(Controllable controllable) {
-//		this.controllable = controllable;
-//	}
+	public void removeControllable() {
+		this.controllable = null;
+	}
+	
+	public Controllable getControllable() {
+		return controllable;
+	}
+
+	public void setControllableObject(Controllable controllable) {
+		this.controllable = controllable;
+	}
 
 	public class InputRecorder{
 		private boolean recorderIsFull = false;
