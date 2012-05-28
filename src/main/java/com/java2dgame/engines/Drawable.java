@@ -1,4 +1,4 @@
-package com.java2dgame.app;
+package com.java2dgame.engines;
 
 import java.awt.Image;
 

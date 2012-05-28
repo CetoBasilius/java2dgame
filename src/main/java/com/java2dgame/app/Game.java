@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 
 import org.apache.log4j.Logger;
 
+import com.java2dgame.engines.CollisionEngine;
 import com.java2dgame.engines.GraphicsEngine;
 import com.java2dgame.engines.InputEngine;
 import com.java2dgame.resources.ResourceLoader;
@@ -40,28 +41,16 @@ public final class Game implements Runnable {
 		ResourceLoader.getInstance().getImages();
 		
 		//TODO this is a test, remove it later
-		testGraphicsObjectPool();
+		testObject();
 
 		gameLoop();
 	}
 
-	private void testGraphicsObjectPool() {
+	private void testObject() {
 		testobject = new TestObject();
 		testobject.setImage(Toolkit.getDefaultToolkit().getImage(ResourceLoader.class.getResource("testimage.jpg")));
 		GraphicsEngine.getInstance().addDrawableObject(testobject);
 		InputEngine.getInstance().setControllableObject(testobject);
-	}
-	
-	private void gameLoop(){
-		Logger.getLogger(this.getClass()).info("Main loop started.");
-		while(true){
-			sleepThread();
-			InputEngine.getInstance().update();
-			
-			//TODO this is a test, remove later
-			testobject.update();
-
-		}
 	}
 	
 	private void sleepThread() {
@@ -69,6 +58,18 @@ public final class Game implements Runnable {
 			Thread.sleep(GAME_LOGIC_INTERVAL );
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void gameLoop(){
+		Logger.getLogger(this.getClass()).info("Main loop started.");
+		while(true){
+			sleepThread();
+			InputEngine.getInstance().update();
+			CollisionEngine.getInstance().update();
+			
+			//TODO this is a test, remove later
+			testobject.update();
 		}
 	}
 }

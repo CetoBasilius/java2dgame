@@ -1,18 +1,23 @@
 package com.java2dgame.engines;
 
+import java.util.Vector;
+
 import org.apache.log4j.Logger;
 
 public class CollisionEngine {
 	
 	private float lastCollisionDepthX;
 	private float lastCollisionDepthY;
+	private Vector<Collisionable> collisionableObjects = new Vector<Collisionable>(100,100);
 
 	private static class CollisionEngineReferenceHolder {
         private static final CollisionEngine INSTANCE = new CollisionEngine();
     }
 
 	private CollisionEngine(){
-		Logger.getLogger(this.getClass()).info("Collision engine started.");
+		if (Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
+			Logger.getLogger(this.getClass()).info("Collision engine started.");
+		}
 	}
 	
 	public static CollisionEngine getInstance() {
@@ -121,4 +126,14 @@ public class CollisionEngine {
 		return collisionDepth;
 	}
 	
+	
+	private void checkAllObjects() {
+		for(Collisionable object : collisionableObjects){
+			//TODO actually check all objects
+		}	
+	}
+
+	public void update() {
+		checkAllObjects();
+	}
 }

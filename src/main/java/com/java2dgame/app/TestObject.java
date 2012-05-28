@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 
 import com.java2dgame.engines.Collisionable;
+import com.java2dgame.engines.Controllable;
+import com.java2dgame.engines.Drawable;
 
 public class TestObject implements Drawable, Controllable, Collisionable{
 	
