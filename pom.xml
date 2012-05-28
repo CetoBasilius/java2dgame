@@ -43,7 +43,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2.1</version>
 				<configuration>
-					<mainClass>com.gamefinal.app.GameMain</mainClass>
+					<mainClass>com.java2dgame.app.Application</mainClass>
 				</configuration>
 			</plugin>
 
@@ -55,7 +55,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.gamefinal.app.GameMain</mainClass>
+							<mainClass>com.java2dgame.app.Application</mainClass>
 						</manifest>
 					</archive>
 
