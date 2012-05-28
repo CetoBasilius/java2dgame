@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 
 import org.apache.log4j.Logger;
 
-import com.java2dgame.app.Controllable;
 
 public final class InputEngine {
 	
@@ -31,7 +30,9 @@ public final class InputEngine {
     }
 	
 	private InputEngine(){
-		Logger.getLogger(this.getClass()).info("Input engine started.");
+		if (Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
+			Logger.getLogger(this.getClass()).info("Input engine started.");
+		}
 	}
 	
 	public static InputEngine getInstance() {
@@ -44,14 +45,31 @@ public final class InputEngine {
 	}
     
 	public void update(){
+		//-------------------------------INPUTRECORDER IS ENTIRELY EXPERIMENTAL--------------------------------------------------
 		inputController = inputRecorder.update(inputController);
 
-		if(isHoldingUpKey()){controllable.holdingUp();}
-		if(isHoldingDownKey()){controllable.holdingDown();}
-		if(isHoldingRightKey()){controllable.holdingRight();}
-		if(isHoldingLeftKey()){controllable.holdingLeft();}
-//-------------------------------THIS IS ENTIRELY EXPERIMENTAL--------------------------------------------------
-
+		if(controllable != null) {
+			if(isHoldingUpKey()){controllable.holdingUp();}
+			if(isHoldingDownKey()){controllable.holdingDown();}
+			if(isHoldingRightKey()){controllable.holdingRight();}
+			if(isHoldingLeftKey()){controllable.holdingLeft();}
+			
+			if(isHoldingJumpKey()){controllable.holdingJump();}
+			if(isHoldingFireKey()){controllable.holdingFire();}
+			if(isHoldingReloadKey()){controllable.holdingReload();}
+			if(isHoldingActionKey()){controllable.holdingAction();}
+			
+			if(pressedUpKey()){controllable.pressedUp();}
+			if(pressedDownKey()){controllable.pressedDown();}
+			if(pressedRightKey()){controllable.pressedRight();}
+			if(pressedLeftKey()){controllable.pressedLeft();}
+			
+			if(pressedJumpKey()){controllable.pressedJump();}
+			if(pressedFireKey()){controllable.pressedFire();}
+			if(pressedReloadKey()){controllable.pressedReload();}
+			if(pressedActionKey()){controllable.pressedAction();}
+		}
+		
 	}
 
 	public void pressKey(int keyCode){
@@ -270,8 +288,6 @@ public final class InputEngine {
 		return false;
 	}
 	
-	
-	//TODO add controllable and control this object with an interface
 	public void removeControllable() {
 		this.controllable = null;
 	}
@@ -290,8 +306,7 @@ public final class InputEngine {
 		private int savedPlayBackPosition = 0;
 		private static final int RECORDER_BUFFER_SIZE = 5000;
 		private InputEngineController inputRecord[] = new InputEngineController[RECORDER_BUFFER_SIZE];
-		public RecorderState recorderState = RecorderState.OFF;
-		
+		public RecorderState recorderState = RecorderState.OFF;	
 		
 		public InputRecorder(){
 			for(int line=0;line<RECORDER_BUFFER_SIZE;line++){

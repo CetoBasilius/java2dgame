@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
-import com.java2dgame.app.Drawable;
 
 public final class GraphicsEngine{
 	
@@ -21,7 +20,7 @@ public final class GraphicsEngine{
 	private static int WINDOW_THICKNESS_X;
 	private static Dimension desktopDimension = Toolkit.getDefaultToolkit().getScreenSize();
 	
-	private Vector<Drawable> drawableObjects = new Vector<Drawable>();
+	private Vector<Drawable> drawableObjects = new Vector<Drawable>(100,100);
 	private boolean fullScreen;
 	private WindowContainer windowReference;
 	
@@ -30,7 +29,9 @@ public final class GraphicsEngine{
     }
 
 	private GraphicsEngine(){
-		Logger.getLogger(this.getClass()).info("Graphics engine started.");
+		if (Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
+			Logger.getLogger(this.getClass()).info("Graphics engine started.");
+		}
 	}
 	
 	public static GraphicsEngine getInstance() {
