@@ -4,9 +4,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.java2dgame.engines.GraphicsEngine;
+import com.java2dgame.engines.InputEngine;
 
 
-public class FullScreenCombinationAdapter implements KeyListener{
+public class GameKeyAdapter implements KeyListener{
 	
 	boolean altPressed = false;
 	boolean enterPressed = false;
@@ -26,6 +27,8 @@ public class FullScreenCombinationAdapter implements KeyListener{
 		if(altPressed && enterPressed) {
 			GraphicsEngine.getInstance().toggleFullScreen();
 			e.consume();// Stop the event from propagating.
+		} else {
+			InputEngine.getInstance().pressKey(e.getKeyCode());
 		}
 	}
 
@@ -44,9 +47,11 @@ public class FullScreenCombinationAdapter implements KeyListener{
 		if(altPressed && enterPressed) {
 			GraphicsEngine.getInstance().toggleFullScreen();
 			e.consume();// Stop the event from propagating.
+		} else {
+			InputEngine.getInstance().releaseKey(e.getKeyCode());
 		}
 	}
-
+	
 	@Override
 	public void keyTyped(KeyEvent e){}
 }

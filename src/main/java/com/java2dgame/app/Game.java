@@ -11,6 +11,7 @@ import com.java2dgame.resources.ResourceLoader;
 public final class Game implements Runnable {
 	
 	private static Thread mainLoop;
+	private static long GAME_LOGIC_INTERVAL = 25;
 	
 	//TODO remove this, its a test
 	TestObject testobject;
@@ -46,9 +47,9 @@ public final class Game implements Runnable {
 
 	private void testGraphicsObjectPool() {
 		testobject = new TestObject();
-		
 		testobject.setImage(Toolkit.getDefaultToolkit().getImage(ResourceLoader.class.getResource("testimage.jpg")));
 		GraphicsEngine.getInstance().addDrawableObject(testobject);
+		InputEngine.getInstance().setControllableObject(testobject);
 	}
 	
 	private void gameLoop(){
@@ -57,16 +58,15 @@ public final class Game implements Runnable {
 			sleepThread();
 			InputEngine.getInstance().update();
 			
-			//TODO this is a test, remove it
-			testobject.setScreenLocation(testobject.getScreenlocationX()+1, testobject.getScreenlocationY()+1);
+			//TODO this is a test, remove later
+			testobject.update();
 
 		}
 	}
 	
 	private void sleepThread() {
 		try {
-			//TODO fix this and add a constant
-			Thread.sleep(50);
+			Thread.sleep(GAME_LOGIC_INTERVAL );
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
