@@ -9,6 +9,8 @@ import com.java2dgame.engines.Drawable;
 
 public class TestObject implements Drawable, Controllable, Collisionable{
 	
+	private int radius;
+	private int angle;
 	private int assignedIndex;
 	private int screenLocationX;
 	private int screenLocationY;
@@ -26,9 +28,33 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 	}
 	
 	@Override
+	public int getImageAngle() {
+		return angle;
+	}
+
+	@Override
+	public void setSize(int radius) {
+		this.radius = radius;
+		
+		size.width = radius*2;
+		size.height = radius*2;
+	}
+
+	@Override
+	public float getRadius() {
+		return radius;
+	}
+
+
+	@Override
 	public void setSize(int width, int height) {
 		size.width = width;
 		size.height = height;
+
+		radius = width;
+		if(height > radius) {
+			radius = height;
+		}
 	}
 
 	@Override
@@ -106,6 +132,7 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 	public void addVerticalVelocity(float velocity) {
 		verticalVelocity+=velocity;
 	}
+	
 
 	public void update() {
 		/*
@@ -163,15 +190,13 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 
 	@Override
 	public void holdingReload() {
-		// TODO Auto-generated method stub
-		
+		angle+=2;
 	}
 
 
 	@Override
 	public void holdingAction() {
-		// TODO Auto-generated method stub
-		
+		angle-=2;
 	}
 
 
@@ -229,6 +254,5 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 		// TODO Auto-generated method stub
 		
 	}
-
 
 }

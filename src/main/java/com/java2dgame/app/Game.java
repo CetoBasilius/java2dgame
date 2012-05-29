@@ -12,7 +12,7 @@ import com.java2dgame.resources.ResourceLoader;
 public final class Game implements Runnable {
 	
 	private static Thread mainLoop;
-	private static long GAME_LOGIC_INTERVAL = 25;
+	private static long GAME_LOGIC_INTERVAL = 20;
 	
 	//TODO remove this, its a test
 	TestObject testobject;
