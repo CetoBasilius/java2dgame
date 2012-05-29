@@ -59,13 +59,12 @@ public class GameCanvas extends JPanel implements Runnable{
 			bufferGraphics.setColor(Color.white);
 			bufferGraphics.drawString(String.valueOf(getFPS()), 20, 20);
 		}
-		graphics.drawImage(offScreen, 0, 0, this);
+		graphics.drawImage(offScreen, 0, 0,preferredSize.width,preferredSize.height, this);
 	}
 	
 	
 	@Override
 	public void update(Graphics g){
-		super.update(g);
 		paint(g);
 	}
 

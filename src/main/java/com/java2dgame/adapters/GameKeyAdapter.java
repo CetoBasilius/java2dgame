@@ -11,25 +11,32 @@ public class GameKeyAdapter implements KeyListener{
 	
 	boolean altPressed = false;
 	boolean enterPressed = false;
-
+	boolean shiftPressed = false;
+	
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_ENTER:
 			enterPressed=true;
-
 			break;
 		case KeyEvent.VK_ALT:
 			altPressed=true;
 			break;
+		case KeyEvent.VK_SHIFT:
+			shiftPressed=true;
+			break;
 		}
-
-		if(altPressed && enterPressed) {
-			GraphicsEngine.getInstance().toggleFullScreen();
-			e.consume();// Stop the event from propagating.
+		if(altPressed && enterPressed && shiftPressed) {
+			GraphicsEngine.getInstance().toggleTrueFullScreen();
 		} else {
-			InputEngine.getInstance().pressKey(e.getKeyCode());
-		}
+			if(altPressed && enterPressed) {
+				GraphicsEngine.getInstance().toggleFullScreen();
+				e.consume();// Stop the event from propagating.
+			} else {
+				InputEngine.getInstance().pressKey(e.getKeyCode());
+			}
+		}	
 	}
 
 	@Override
@@ -42,13 +49,20 @@ public class GameKeyAdapter implements KeyListener{
 		case KeyEvent.VK_ALT:
 			altPressed=false;
 			break;
+		case KeyEvent.VK_SHIFT:
+			shiftPressed=false;
+			break;
 		}
 
-		if(altPressed && enterPressed) {
-			GraphicsEngine.getInstance().toggleFullScreen();
-			e.consume();// Stop the event from propagating.
+		if(altPressed && enterPressed && shiftPressed) {
+			GraphicsEngine.getInstance().toggleTrueFullScreen();
 		} else {
-			InputEngine.getInstance().releaseKey(e.getKeyCode());
+			if(altPressed && enterPressed) {
+				GraphicsEngine.getInstance().toggleFullScreen();
+				e.consume();// Stop the event from propagating.
+			} else {
+				InputEngine.getInstance().releaseKey(e.getKeyCode());
+			}
 		}
 	}
 	
