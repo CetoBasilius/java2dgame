@@ -78,23 +78,55 @@ public final class GraphicsEngine{
 		
 		if(fullScreen==false) {
 
-			//Set Fullscreen On
-			frame.setVisible(false);
-			frame.dispose();
-			frame.setUndecorated(true);
-			frame.setLocation(0, 0);
-			frame.setSize(desktopDimension);
-			frame.setVisible(true);
-			frame.validate();
-			frame.requestFocus();	
-			panel.setLocation(getWindowCenterPosition(resolution));
-			panel.requestFocus();
-			fullScreen=true;
-		}
-		else
-		{
+			setFullScreen(frame, panel, resolution);
+		} else {
 			resetWindow(frame, panel, resolution);
 		}
+	}
+
+	public void toggleTrueFullScreen(JFrame frame, JPanel panel, Dimension resolution) {
+		if(fullScreen==false) {
+			setTrueFullScreen();
+		} else {
+			resetWindow();
+		}
+	}
+
+
+	private void setFullScreen(JFrame frame, JPanel panel, Dimension resolution) {
+		//Set Fullscreen On
+		frame.setVisible(false);
+		frame.dispose();
+		frame.setUndecorated(true);
+		frame.setLocation(0, 0);
+		frame.setSize(desktopDimension);
+		frame.setVisible(true);
+		frame.validate();
+		frame.requestFocus();	
+		panel.setLocation(getWindowCenterPosition(resolution));
+		panel.requestFocus();
+		fullScreen=true;
+	}
+	
+	public void setTrueFullScreen() {
+		JFrame frame = windowReference.frame;;
+		//Set Fullscreen On
+		frame.setVisible(false);
+		frame.dispose();
+		frame.setUndecorated(true);
+		frame.setLocation(0, 0);
+		frame.setSize(desktopDimension);
+		frame.setVisible(true);
+		frame.validate();
+		frame.requestFocus();	
+		
+		JPanel panel = windowReference.panel;
+		panel.setLocation(0,0);
+		panel.setPreferredSize(desktopDimension);
+		panel.setSize(desktopDimension);
+		panel.requestFocus();
+		fullScreen=true;
+		
 	}
 	
 	public void resetWindow(JFrame frame, JPanel panel,Dimension resolution) {
@@ -110,6 +142,9 @@ public final class GraphicsEngine{
 		frame.setVisible(true);
 		frame.validate();
 		frame.requestFocus();
+		
+		panel.setPreferredSize(new Dimension(gameResolutionX, gameResolutionY));
+		panel.setSize(gameResolutionX, gameResolutionY);
 		panel.setLocation(0,0);
 		panel.requestFocus();
 		fullScreen=false;
@@ -121,6 +156,10 @@ public final class GraphicsEngine{
 	
 	public void toggleFullScreen() {
 		toggleFullScreen(windowReference.frame,windowReference.panel,windowReference.prefferedDimension);
+	}
+	
+	public void toggleTrueFullScreen() {
+		toggleTrueFullScreen(windowReference.frame,windowReference.panel,windowReference.prefferedDimension);
 	}
 	
 	/**
