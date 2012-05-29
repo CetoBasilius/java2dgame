@@ -62,8 +62,10 @@ public class GameCanvas extends JPanel implements Runnable{
 		graphics.drawImage(offScreen, 0, 0, this);
 	}
 	
+	
 	@Override
 	public void update(Graphics g){
+		super.update(g);
 		paint(g);
 	}
 

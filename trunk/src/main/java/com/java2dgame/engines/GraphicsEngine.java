@@ -1,11 +1,14 @@
 package com.java2dgame.engines;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -60,12 +63,6 @@ public final class GraphicsEngine{
 		bufferGraphics.setBackground(Color.black);
 		bufferGraphics.clearRect(0, 0, width, height);
 		renderObjects(bufferGraphics);
-	}
-	
-	private void renderObjects(Graphics2D bufferGraphics) {
-		for(Drawable object : drawableObjects){
-			bufferGraphics.drawImage(object.getImage(), object.getScreenlocationX(), object.getScreenlocationY(), null);
-		}	
 	}
 
 	public void addDrawableObject(Drawable object){
@@ -125,6 +122,35 @@ public final class GraphicsEngine{
 	public void toggleFullScreen() {
 		toggleFullScreen(windowReference.frame,windowReference.panel,windowReference.prefferedDimension);
 	}
+	
+	/**
+	 * Will draw the given Image with the specified angle, scale and alpha level to the given Graphics object.
+	 * <p>
+	 * The specified coordinates will be the center of the image.
+	 * 
+	 * @param angle value in angle.
+	 * @param scale default scale is 1.0
+	 * @param Alpha value can range from 0.0 to 1.0 <p>
+	 * @param x the x coordinate of the rectangle to be drawn.
+     * @param y the y coordinate of the rectangle to be drawn.<p>
+     * @param image the Image to be drawn.
+     * @param graphics the Graphics2D on where the image will be drawn.
+	 * 
+	 */
+	public static void drawImage(Image image, Graphics2D graphics, int x, int y, float angle, float scale, float Alpha) {
+
+		graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,Alpha));
+		
+		AffineTransform affineTransform = new AffineTransform();
+		affineTransform.translate (x,y);
+		affineTransform.scale(scale, scale);
+		affineTransform.translate (-image.getWidth(null)/2,-image.getHeight(null)/2);
+		affineTransform.rotate(Math.toRadians(angle), image.getWidth(null)/2, image.getHeight(null)/2);
+
+		graphics.drawImage(image, affineTransform, null);
+
+		graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1));
+	}
 
 	public boolean isFullScreen() {
 		return fullScreen;
@@ -132,6 +158,12 @@ public final class GraphicsEngine{
 
 	public void setWindowReference(JFrame frame,JPanel panel,Dimension dimension) {
 		windowReference = new WindowContainer(frame,panel,dimension);
+	}
+	
+	private void renderObjects(Graphics2D bufferGraphics) {
+		for(Drawable object : drawableObjects){
+			drawImage(object.getImage(), bufferGraphics, object.getScreenlocationX(), object.getScreenlocationY(), object.getImageAngle(), 1, 1.0f);
+		}	
 	}
 
 	public class WindowContainer{

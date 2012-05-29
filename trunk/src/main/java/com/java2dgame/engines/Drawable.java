@@ -9,5 +9,6 @@ public interface Drawable {
 	public Image getImage();
 	public int getScreenlocationY();
 	public int getScreenlocationX();
+	public int getImageAngle();
 	
 }

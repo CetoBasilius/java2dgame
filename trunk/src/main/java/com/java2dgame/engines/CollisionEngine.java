@@ -24,7 +24,7 @@ public class CollisionEngine {
         return CollisionEngineReferenceHolder.INSTANCE;
     }
 	
-	public float distanceYBetweenSquareObjects(Collisionable object1,Collisionable object2){
+	public float distanceYBetweenObjectsToEdges(Collisionable object1,Collisionable object2){
 		float absoluteDifferenceY = Math.abs((float)object1.getWorldPositionY()-(float)object2.getWorldPositionY());
 		float objectHalfSizeY1=(float)object1.getSizeHeight()/2;
 		float objectHalfSizeY2=(float)object2.getSizeHeight()/2;
@@ -32,7 +32,7 @@ public class CollisionEngine {
 		return absoluteDifferenceY-objectHalfSizeY1-objectHalfSizeY2;
 	}
 	
-	public float distanceXBetweenSquareObjects(Collisionable object1,Collisionable object2){
+	public float distanceXBetweenObjectsToEdges(Collisionable object1,Collisionable object2){
 		float absoluteDifferenceX = Math.abs((float)object1.getWorldPositionX()-(float)object2.getWorldPositionX());
 		float objectHalfSizeX1=(float)object1.getSizeWidth()/2;
 		float objectHalfSizeX2=(float)object2.getSizeWidth()/2;
@@ -40,9 +40,27 @@ public class CollisionEngine {
 		return (absoluteDifferenceX-objectHalfSizeX1-objectHalfSizeX2);
 	}
 	
-	public float distanceBetweenSquareObjects(Collisionable object1,Collisionable object2){
-
-		return (float)Math.sqrt(Math.pow(distanceXBetweenSquareObjects(object1,object2),2)+Math.pow(distanceYBetweenSquareObjects(object1,object2),2));
+	/**
+	 * This will check the distance between 2 objects from their edges
+	 * 
+	 * @param object1 The first object.
+	 * @param object2 The second object.
+	 * @return The distance between the nearest edges of the objects. value will be negative if squares overlap.
+	 */
+	public float distanceBetweenObjectsEdges(Collisionable object1,Collisionable object2){
+		return (float)Math.sqrt(Math.pow(distanceXBetweenObjectsToEdges(object1,object2),2)+Math.pow(distanceYBetweenObjectsToEdges(object1,object2),2));
+	}
+	
+	
+	/**
+	 * This will check the distance between 2 objects from their center
+	 * 
+	 * @param object1 The first object.
+	 * @param object2 The second object.
+	 * @return The distance between the center of both objects. cannot be negative.
+	 */
+	public float distanceBetweenObjectsCenter(Collisionable object1,Collisionable object2){
+		return (float)Math.sqrt(Math.pow(object1.getWorldPositionX()-object2.getWorldPositionX(),2)+Math.pow(object1.getWorldPositionY()-object2.getWorldPositionY(),2));
 	}
 	
 	public boolean squareObjectsCollideX(Collisionable object1,Collisionable object2){
@@ -104,6 +122,20 @@ public class CollisionEngine {
 			}else{
 				collisionOcurred=true;
 			}
+		}
+		
+		return collisionOcurred;
+	}
+	
+	public boolean circularObjectsCollide(Collisionable object1, Collisionable object2) {
+		boolean collisionOcurred = false;
+		float distance = distanceBetweenObjectsCenter(object1,object2);
+	
+		float result = distance - object1.getRadius() - object2.getRadius();
+		if(result < 0) {
+			collisionOcurred = true;
+		} else {
+			collisionOcurred = false;
 		}
 		
 		return collisionOcurred;
