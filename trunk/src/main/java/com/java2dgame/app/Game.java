@@ -77,10 +77,10 @@ public final class Game implements Runnable {
 	}
 
 	private void makeTestObject() {
-		for(int a = 0; a<6;a++) {
+		for(int a = 0; a<48;a++) {
 			testobject = new TestObject();
 			testobject.setImage(Toolkit.getDefaultToolkit().getImage(ResourceLoader.class.getResource("testimage.jpg")));
-			testobject.setWorldPosition((float)(300+(Math.random()*260)), (float)(300+(Math.random()*260)));
+			testobject.setWorldPosition((float)(0+(Math.random()*800)), (float)(0+(Math.random()*600)));
 
 			GraphicsEngine.getInstance().addDrawableObject(testobject);
 			InputEngine.getInstance().setControllableObject(testobject);
