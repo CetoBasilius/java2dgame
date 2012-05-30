@@ -3,6 +3,9 @@ package com.java2dgame.entities;
 import java.awt.Dimension;
 import java.awt.Image;
 
+import com.java2dgame.behaviors.CollisionBehavior;
+import com.java2dgame.behaviors.CollisionEnergyTransfer;
+
 
 public class TestObject implements Drawable, Controllable, Collisionable, Updateable{
 	
@@ -20,6 +23,30 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 	
 	private float horizontalVelocity;
 	private float verticalVelocity;
+	private int collisionIndex;
+	private CollisionBehavior collisionBehavior = new CollisionEnergyTransfer();
+	
+	public TestObject() {
+		size.height=32;
+		size.width=32;
+		radius = 16;
+	}
+	
+	@Override
+	public CollisionBehavior getCollisionBehavior() {
+		return collisionBehavior;
+	}
+	
+	
+	@Override
+	public int getCollisionAssignedIndex() {
+		return collisionIndex;
+	}
+
+	@Override
+	public void setCollisionAssignedIndex(int index) {
+		collisionIndex = index;
+	}
 	
 	public void setImage(Image image) {
 		this.image = image;
@@ -44,7 +71,6 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 	@Override
 	public void setImageAngle(int angle) {
 		this.angle = angle;
-		
 	}
 
 	@Override
@@ -146,6 +172,15 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 		verticalVelocity+=velocity;
 	}
 	
+	@Override
+	public void setHorizontalVelocity(float velocity) {
+		horizontalVelocity = velocity;
+	}
+
+	@Override
+	public void setVerticalVelocity(float velocity) {
+		verticalVelocity = velocity;
+	}
 
 	@Override
 	public void update() {
@@ -154,12 +189,17 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 		 * that the screen Y coordinate 
 		 * system is flipped.
 		 */
-		
-		worldPositionX += horizontalVelocity;
-		worldPositionY -= verticalVelocity;
-		
+		updateCollision();
+
 		screenLocationX = (int) worldPositionX;
 		screenLocationY = (int) worldPositionY;
+		
+	}
+	
+	@Override
+	public void updateCollision() {
+		worldPositionX += horizontalVelocity;
+		worldPositionY -= verticalVelocity;
 	}
 
 	@Override

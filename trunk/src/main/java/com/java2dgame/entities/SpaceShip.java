@@ -3,6 +3,8 @@ package com.java2dgame.entities;
 import java.awt.Dimension;
 import java.awt.Image;
 
+import com.java2dgame.behaviors.CollisionBehavior;
+import com.java2dgame.behaviors.CollisionEnergyTransfer;
 import com.java2dgame.behaviors.ShootBehavior;
 import com.java2dgame.behaviors.ShootLaser;
 
@@ -26,13 +28,31 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	
 	private ShootBehavior shootBehavior;
 	private double spaceShipAcceleration = 0.5;
+	private int collisionIndex;
+	private CollisionBehavior collisionBehavior = new CollisionEnergyTransfer();
 	
 	public SpaceShip(Image image){
 		this.image = image;
-		radius = 64;
+		radius = 32;
 		size.width = 64;
 		size.height = 64;
 		shootBehavior = new ShootLaser();
+	}
+	
+	@Override
+	public CollisionBehavior getCollisionBehavior() {
+		return collisionBehavior;
+	}
+	
+	
+	@Override
+	public int getCollisionAssignedIndex() {
+		return collisionIndex;
+	}
+
+	@Override
+	public void setCollisionAssignedIndex(int index) {
+		collisionIndex = index;
 	}
 	
 	@Override
@@ -129,21 +149,34 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		this.screenLocationY = y;
 	}
 
+	@Override
 	public float getHorizontalVelocity() {
 		return horizontalVelocity;
 	}
 
+	@Override
 	public float getVerticalVelocity() {
 		return verticalVelocity;
 	}
 	
+	@Override
 	public void addHorizontalVelocity(float velocity) {
 		horizontalVelocity+=velocity;
 	}
 
-
+	@Override
 	public void addVerticalVelocity(float velocity) {
 		verticalVelocity+=velocity;
+	}
+	
+	@Override
+	public void setHorizontalVelocity(float velocity) {
+		horizontalVelocity = velocity;
+	}
+
+	@Override
+	public void setVerticalVelocity(float velocity) {
+		verticalVelocity = velocity;
 	}
 
 	public void addForwardVelocity(double velocity) {
@@ -160,6 +193,11 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 
 	}
 
+	@Override
+	public void updateCollision() {
+		worldPositionX += horizontalVelocity;
+		worldPositionY -= verticalVelocity;
+	}
 
 	@Override
 	public void update() {
@@ -175,9 +213,7 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		if(angle>360) {
 			angle = 360 -angle;
 		}
-		
-		worldPositionX += horizontalVelocity;
-		worldPositionY -= verticalVelocity;
+		updateCollision();
 		
 		screenLocationX = (int) worldPositionX;
 		screenLocationY = (int) worldPositionY;
@@ -278,5 +314,7 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

@@ -3,6 +3,9 @@ package com.java2dgame.entities;
 import java.awt.Dimension;
 import java.awt.Image;
 
+import com.java2dgame.behaviors.CollisionBehavior;
+import com.java2dgame.behaviors.CollisionDoNothing;
+
 public class Laser implements Drawable, Collisionable, Updateable{
 	
 	private int radius;
@@ -19,12 +22,19 @@ public class Laser implements Drawable, Collisionable, Updateable{
 	
 	private float horizontalVelocity;
 	private float verticalVelocity;
+	private int collisionIndex;
+	private CollisionBehavior collisionBehavior = new CollisionDoNothing();
 	
 	public Laser(Image image){
 		this.image = image;
 		radius = 16;
 		size.width = 16;
 		size.height = 16;
+	}
+	
+	@Override
+	public CollisionBehavior getCollisionBehavior() {
+		return collisionBehavior;
 	}
 	
 	@Override
@@ -138,6 +148,16 @@ public class Laser implements Drawable, Collisionable, Updateable{
 	public void addVerticalVelocity(float velocity) {
 		verticalVelocity+=velocity;
 	}
+	
+	@Override
+	public void setHorizontalVelocity(float velocity) {
+		horizontalVelocity = velocity;
+	}
+
+	@Override
+	public void setVerticalVelocity(float velocity) {
+		verticalVelocity = velocity;
+	}
 
 	public void addForwardVelocity(double velocity) {
 		double theta = Math.toRadians(angle);
@@ -151,6 +171,12 @@ public class Laser implements Drawable, Collisionable, Updateable{
 
 	public void brakeForwardVelocity() {
 
+	}
+	
+	@Override
+	public void updateCollision() {
+		worldPositionX += horizontalVelocity;
+		worldPositionY -= verticalVelocity;
 	}
 
 
@@ -169,12 +195,23 @@ public class Laser implements Drawable, Collisionable, Updateable{
 			angle = 360 -angle;
 		}
 		
-		worldPositionX += horizontalVelocity;
-		worldPositionY -= verticalVelocity;
+		updateCollision();
 		
 		screenLocationX = (int) worldPositionX;
 		screenLocationY = (int) worldPositionY;
 		
 	}
+
+	@Override
+	public int getCollisionAssignedIndex() {
+		return collisionIndex;
+	}
+
+	@Override
+	public void setCollisionAssignedIndex(int index) {
+		collisionIndex = index;
+	}
+
+	
 
 }

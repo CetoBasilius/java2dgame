@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import com.java2dgame.app.Game;
+import com.java2dgame.engines.CollisionEngine;
 import com.java2dgame.engines.GraphicsEngine;
 import com.java2dgame.entities.Laser;
 import com.java2dgame.resources.ResourceLoader;
@@ -25,8 +26,9 @@ public class ShootLaser implements ShootBehavior{
 
 			GraphicsEngine.getInstance().addDrawableObject(testObject);
 			Game.getInstance().addUpdateableObject(testObject);
+			CollisionEngine.getInstance().addCollisionObject(testObject);
 			startCoolingOff();
-			//CollisionEngine.getInstance().
+			
 		}
 	}
 

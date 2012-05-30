@@ -159,12 +159,26 @@ public class CollisionEngine {
 		return collisionDepth;
 	}
 	
+	public synchronized void addCollisionObject(Collisionable object){
+		object.setCollisionAssignedIndex(collisionableObjects.size());
+		collisionableObjects.add(object);
+	}
+	
+	public synchronized void removeDrawableObject(Collisionable object){
+		collisionableObjects.removeElementAt(object.getCollisionAssignedIndex());
+	}
 	
 	//TODO implement this
-	private void checkAllObjects() {
-		for(Collisionable object : collisionableObjects){
-			//TODO actually check all objects
+	private synchronized void checkAllObjects() {
+		for(Collisionable object1 : collisionableObjects){
+			checkObjectAgainstAllObjects(object1);
 		}	
+	}
+
+	private synchronized void checkObjectAgainstAllObjects(Collisionable object1) {
+		for(Collisionable object2 : collisionableObjects){
+			object1.getCollisionBehavior().update(object1,object2);
+		}
 	}
 
 	public void update() {
