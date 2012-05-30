@@ -25,22 +25,32 @@ public final class Game implements Runnable {
 	TestObject testobject;
 	SpaceShip spaceShip;
 	
+
+	private static class GameReferenceHolder {
+        private static final Game INSTANCE = new Game();
+    }
+
 	private Game(){}
+
+	public static Game getInstance() {
+        return GameReferenceHolder.INSTANCE;
+    }
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException{
+		throw new CloneNotSupportedException();
+	}
 	
 	public static void startGame(){
 		if(mainLoop == null){
 			Logger.getLogger(Game.class).info("Game created.");
-			mainLoop = new Thread(null,new Game(),"Game");
+			mainLoop = new Thread(null,getInstance(),"Game");
 			mainLoop.start();
 		}else{
 			Logger.getLogger(Game.class).warn("Game already exists!");
 		}
 	}
 	
-	@Override
-	public Object clone() throws CloneNotSupportedException{
-		return new CloneNotSupportedException();
-	}
 
 	@Override
 	public void run() {

@@ -211,10 +211,11 @@ public final class GraphicsEngine{
 		windowReference = new WindowContainer(frame,panel,dimension);
 	}
 	
-	private void renderObjects(Graphics2D bufferGraphics) {
+	private synchronized void renderObjects(Graphics2D bufferGraphics) {
 		for(Drawable object : drawableObjects){
 			drawImage(object.getImage(), bufferGraphics, object.getScreenlocationX(), object.getScreenlocationY(), object.getImageAngle(), 1, 1.0f);
-			drawGameObjectCircleBounds(object,bufferGraphics);
+			//TODO add graphics debug
+			//drawGameObjectCircleBounds(object,bufferGraphics);
 		}	
 	}
 

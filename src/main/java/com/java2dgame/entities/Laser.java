@@ -3,11 +3,7 @@ package com.java2dgame.entities;
 import java.awt.Dimension;
 import java.awt.Image;
 
-import com.java2dgame.behaviors.ShootBehavior;
-import com.java2dgame.behaviors.ShootLaser;
-
-
-public class SpaceShip implements Drawable, Controllable, Collisionable, Updateable{
+public class Laser implements Drawable, Collisionable, Updateable{
 	
 	private int radius;
 	private int angle;
@@ -17,22 +13,18 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	private int screenLocationY;
 	private Image image;
 	
-	private Dimension size = new Dimension(64,64);
+	private Dimension size = new Dimension(16,16);
 	private float worldPositionX;
 	private float worldPositionY;
 	
 	private float horizontalVelocity;
 	private float verticalVelocity;
 	
-	private ShootBehavior shootBehavior;
-	private double spaceShipAcceleration = 0.5;
-	
-	public SpaceShip(Image image){
+	public Laser(Image image){
 		this.image = image;
-		radius = 64;
-		size.width = 64;
-		size.height = 64;
-		shootBehavior = new ShootLaser();
+		radius = 16;
+		size.width = 16;
+		size.height = 16;
 	}
 	
 	@Override
@@ -93,6 +85,7 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	public float getSizeWidth() {
 		return size.width;
 	}
+
 
 	@Override
 	public float getSizeHeight() {
@@ -181,101 +174,6 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		
 		screenLocationX = (int) worldPositionX;
 		screenLocationY = (int) worldPositionY;
-		
-		shootBehavior.update();
-	}
-
-	//--------------------------------------------------- CONTROLS -----------------------------------------------------------//
-	
-	@Override
-	public void holdingUp() {
-		addForwardVelocity(spaceShipAcceleration);
-	}
-
-
-	@Override
-	public void holdingDown() {
-		brakeForwardVelocity();
-	}
-
-	@Override
-	public void holdingLeft() {
-		angle-=4;
-	}
-
-	@Override
-	public void holdingRight() {
-		angle+=4;
-	}
-
-
-	@Override
-	public void holdingFire() {
-		shootBehavior.shoot(this.worldPositionX,this.worldPositionY,this.angle);
-	}
-
-	@Override
-	public void holdingJump() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void holdingReload() {
-		
-	}
-
-
-	@Override
-	public void holdingAction() {
-		
-	}
-
-	@Override
-	public void pressedUp() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pressedDown() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pressedLeft() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pressedRight() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pressedFire() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pressedJump() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pressedReload() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pressedAction() {
-		// TODO Auto-generated method stub
 		
 	}
 
