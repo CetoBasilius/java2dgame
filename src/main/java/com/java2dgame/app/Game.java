@@ -72,16 +72,21 @@ public final class Game implements Runnable {
 		
 		GraphicsEngine.getInstance().addDrawableObject(spaceShip);
 		InputEngine.getInstance().setControllableObject(spaceShip);
+		CollisionEngine.getInstance().addCollisionObject(spaceShip);
 		addUpdateableObject(spaceShip);
 	}
 
 	private void makeTestObject() {
-		testobject = new TestObject();
-		testobject.setImage(Toolkit.getDefaultToolkit().getImage(ResourceLoader.class.getResource("testimage.jpg")));
-		
-		GraphicsEngine.getInstance().addDrawableObject(testobject);
-		InputEngine.getInstance().setControllableObject(testobject);
-		addUpdateableObject(testobject);
+		for(int a = 0; a<6;a++) {
+			testobject = new TestObject();
+			testobject.setImage(Toolkit.getDefaultToolkit().getImage(ResourceLoader.class.getResource("testimage.jpg")));
+			testobject.setWorldPosition((float)(300+(Math.random()*260)), (float)(300+(Math.random()*260)));
+
+			GraphicsEngine.getInstance().addDrawableObject(testobject);
+			InputEngine.getInstance().setControllableObject(testobject);
+			CollisionEngine.getInstance().addCollisionObject(testobject);
+			addUpdateableObject(testobject);
+		}
 	}
 	
 	private void sleepThread() {

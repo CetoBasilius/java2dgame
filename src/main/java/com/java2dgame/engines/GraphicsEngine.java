@@ -18,7 +18,6 @@ import org.apache.log4j.Logger;
 
 import com.java2dgame.entities.Drawable;
 
-
 public final class GraphicsEngine{
 	
 	private static int WINDOW_THICKNESS_Y;
@@ -215,7 +214,7 @@ public final class GraphicsEngine{
 		for(Drawable object : drawableObjects){
 			drawImage(object.getImage(), bufferGraphics, object.getScreenlocationX(), object.getScreenlocationY(), object.getImageAngle(), 1, 1.0f);
 			//TODO add graphics debug
-			//drawGameObjectCircleBounds(object,bufferGraphics);
+			drawGameObjectCircleBounds(object,bufferGraphics);
 		}	
 	}
 

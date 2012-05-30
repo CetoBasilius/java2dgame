@@ -1,9 +1,20 @@
 package com.java2dgame.entities;
 
+import com.java2dgame.behaviors.CollisionBehavior;
+
+
 public interface Collisionable {
 
 	public float getWorldPositionX();
 	public float getWorldPositionY();
+	
+	public float getHorizontalVelocity();
+	public float getVerticalVelocity() ;
+	public void addHorizontalVelocity(float velocity); 
+	public void addVerticalVelocity(float velocity);
+	public void setHorizontalVelocity(float velocity);
+	public void setVerticalVelocity(float velocity) ;
+	
 
 	public float getSizeWidth();
 	public float getSizeHeight();
@@ -14,4 +25,11 @@ public interface Collisionable {
 	
 	public float getRadius();
 	
+	public int getCollisionAssignedIndex();
+	public void setCollisionAssignedIndex(int index);
+	
+	public CollisionBehavior getCollisionBehavior();
+	
+	public void updateCollision();
+
 }
