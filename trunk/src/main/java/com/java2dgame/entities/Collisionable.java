@@ -10,7 +10,7 @@ public interface Collisionable {
 
 	public void setSize(int width, int height);
 	public void setSize(int radius);
-	public void setWorldPosition(int x, int y);
+	public void setWorldPosition(float x, float y);
 	
 	public float getRadius();
 	

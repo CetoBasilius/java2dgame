@@ -39,6 +39,13 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 	public int getImageAngle() {
 		return angle;
 	}
+	
+
+	@Override
+	public void setImageAngle(int angle) {
+		this.angle = angle;
+		
+	}
 
 	@Override
 	public void setSize(int radius) {
@@ -65,7 +72,7 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 	}
 
 	@Override
-	public void setWorldPosition(int x, int y) {
+	public void setWorldPosition(float x, float y) {
 		worldPositionX = x;
 		worldPositionY = y;
 	}
@@ -247,7 +254,5 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 		// TODO Auto-generated method stub
 		
 	}
-
-	
 
 }
