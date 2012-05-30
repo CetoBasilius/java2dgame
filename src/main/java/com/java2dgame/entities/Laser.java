@@ -212,6 +212,16 @@ public class Laser implements Drawable, Collisionable, Updateable{
 		collisionIndex = index;
 	}
 
+	@Override
+	public void setVelocity(float velocity, int angle) {
+		double theta = Math.toRadians(angle);
+		double velocityX = velocity*Math.sin(theta);
+		double velocityY = velocity*Math.cos(theta);
+
+		setHorizontalVelocity((float) velocityX);
+		setVerticalVelocity((float) velocityY);	
+	}
+
 	
 
 }

@@ -204,23 +204,27 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 
 	@Override
 	public void holdingUp() {
-		addVerticalVelocity(0.5f);
+		this.setWorldPosition(this.getWorldPositionX(), this.getWorldPositionY()-5);
+		//addVerticalVelocity(0.5f);
 	}
 
 
 	@Override
 	public void holdingDown() {
-		addVerticalVelocity(-0.5f);
+		this.setWorldPosition(this.getWorldPositionX(), this.getWorldPositionY()+5);
+		//addVerticalVelocity(-0.5f);
 	}
 
 	@Override
 	public void holdingLeft() {
-		addHorizontalVelocity(-0.5f);
+		this.setWorldPosition(this.getWorldPositionX()-5, this.getWorldPositionY());
+		//addHorizontalVelocity(-0.5f);
 	}
 
 	@Override
 	public void holdingRight() {
-		addHorizontalVelocity(0.5f);
+		this.setWorldPosition(this.getWorldPositionX()+5, this.getWorldPositionY());
+		//addHorizontalVelocity(0.5f);
 	}
 
 
@@ -293,6 +297,16 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 	public void pressedAction() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void setVelocity(float velocity, int angle) {
+		double theta = Math.toRadians(angle);
+		double velocityX = velocity*Math.sin(theta);
+		double velocityY = velocity*Math.cos(theta);
+
+		setHorizontalVelocity((float) velocityX);
+		setVerticalVelocity((float) velocityY);	
 	}
 
 }

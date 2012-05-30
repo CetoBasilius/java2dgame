@@ -186,8 +186,9 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		
 		addHorizontalVelocity((float) velocityX);
 		addVerticalVelocity((float) velocityY);
-
 	}
+	
+	
 
 	public void brakeForwardVelocity() {
 
@@ -315,6 +316,16 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		
 	}
 
-	
+	@Override
+	public void setVelocity(float velocity, int angle) {
+		double theta = Math.toRadians(angle);
+		double velocityX = velocity*Math.sin(theta);
+		double velocityY = velocity*Math.cos(theta);
+
+		setHorizontalVelocity((float) velocityX);
+		setVerticalVelocity((float) velocityY);	
+	}
+
+
 
 }

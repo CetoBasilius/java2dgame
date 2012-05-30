@@ -31,5 +31,7 @@ public interface Collisionable {
 	public CollisionBehavior getCollisionBehavior();
 	
 	public void updateCollision();
+	
+	public void setVelocity(float velocity,int angle);
 
 }
