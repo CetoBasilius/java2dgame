@@ -1,4 +1,4 @@
-package com.java2dgame.engines;
+package com.java2dgame.entities;
 
 public interface Controllable {
 	

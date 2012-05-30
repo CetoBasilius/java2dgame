@@ -1,17 +1,15 @@
-package com.java2dgame.app;
+package com.java2dgame.entities;
 
 import java.awt.Dimension;
 import java.awt.Image;
 
-import com.java2dgame.engines.Collisionable;
-import com.java2dgame.engines.Controllable;
-import com.java2dgame.engines.Drawable;
 
-public class TestObject implements Drawable, Controllable, Collisionable{
+public class TestObject implements Drawable, Controllable, Collisionable, Updateable{
 	
 	private int radius;
 	private int angle;
-	private int assignedIndex;
+	private int assignedUpdateIndex;
+	private int assignedDrawIndex;
 	private int screenLocationX;
 	private int screenLocationY;
 	private Image image;
@@ -25,6 +23,16 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 	
 	public void setImage(Image image) {
 		this.image = image;
+	}
+	
+	@Override
+	public void setUpdateAssignedIndex(int index) {
+		assignedUpdateIndex = index;
+	}
+
+	@Override
+	public int getUpdateAssignedIndex() {
+		return assignedUpdateIndex;
 	}
 	
 	@Override
@@ -44,7 +52,6 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 	public float getRadius() {
 		return radius;
 	}
-
 
 	@Override
 	public void setSize(int width, int height) {
@@ -84,16 +91,15 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 	public float getSizeHeight() {
 		return size.height;
 	}
-	
 
 	@Override
-	public int getAssignedIndex() {
-		return assignedIndex;
+	public int getDrawableAssignedIndex() {
+		return assignedDrawIndex;
 	}
 
 	@Override
-	public void setAssignedIndex(int index) {
-		assignedIndex = index;
+	public void setDrawableAssignedIndex(int index) {
+		assignedDrawIndex = index;
 	}
 
 	@Override
@@ -134,6 +140,7 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 	}
 	
 
+	@Override
 	public void update() {
 		/*
 		 * This object is a test, remember
@@ -148,8 +155,6 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 		screenLocationY = (int) worldPositionY;
 	}
 
-
-
 	@Override
 	public void holdingUp() {
 		addVerticalVelocity(0.5f);
@@ -161,12 +166,10 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 		addVerticalVelocity(-0.5f);
 	}
 
-
 	@Override
 	public void holdingLeft() {
 		addHorizontalVelocity(-0.5f);
 	}
-
 
 	@Override
 	public void holdingRight() {
@@ -180,13 +183,11 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 		
 	}
 
-
 	@Override
 	public void holdingJump() {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 	@Override
 	public void holdingReload() {
@@ -199,13 +200,11 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 		angle-=2;
 	}
 
-
 	@Override
 	public void pressedUp() {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 	@Override
 	public void pressedDown() {
@@ -213,13 +212,11 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 		
 	}
 
-
 	@Override
 	public void pressedLeft() {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 	@Override
 	public void pressedRight() {
@@ -227,13 +224,11 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 		
 	}
 
-
 	@Override
 	public void pressedFire() {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 	@Override
 	public void pressedJump() {
@@ -241,18 +236,18 @@ public class TestObject implements Drawable, Controllable, Collisionable{
 		
 	}
 
-
 	@Override
 	public void pressedReload() {
 		// TODO Auto-generated method stub
 		
 	}
 
-
 	@Override
 	public void pressedAction() {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

@@ -44,7 +44,6 @@ public class GameKeyAdapter implements KeyListener{
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_ENTER:
 			enterPressed=false;
-
 			break;
 		case KeyEvent.VK_ALT:
 			altPressed=false;

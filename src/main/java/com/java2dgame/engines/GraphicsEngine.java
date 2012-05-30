@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
+import com.java2dgame.entities.Drawable;
+
 
 public final class GraphicsEngine{
 	
@@ -32,6 +34,10 @@ public final class GraphicsEngine{
     }
 
 	private GraphicsEngine(){
+		logInstance();
+	}
+
+	private void logInstance() {
 		if (Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
 			Logger.getLogger(this.getClass()).info("Graphics engine started.");
 		}
@@ -65,13 +71,13 @@ public final class GraphicsEngine{
 		renderObjects(bufferGraphics);
 	}
 
-	public void addDrawableObject(Drawable object){
-		object.setAssignedIndex(drawableObjects.size());
+	public synchronized void addDrawableObject(Drawable object){
+		object.setDrawableAssignedIndex(drawableObjects.size());
 		drawableObjects.add(object);
 	}
 	
-	public void removeDrawableObject(Drawable object){
-		drawableObjects.removeElementAt(object.getAssignedIndex());
+	public synchronized void removeDrawableObject(Drawable object){
+		drawableObjects.removeElementAt(object.getDrawableAssignedIndex());
 	}
 	
 	public void toggleFullScreen(JFrame frame, JPanel panel, Dimension resolution) {
@@ -190,6 +196,12 @@ public final class GraphicsEngine{
 
 		graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1));
 	}
+	
+	public void drawGameObjectCircleBounds(Drawable object,Graphics2D graphics){
+		int width = object.getImage().getWidth(null);
+		int height = object.getImage().getHeight(null);
+		graphics.drawOval(object.getScreenlocationX()-width/2, object.getScreenlocationY()-height/2, width, height);
+	}
 
 	public boolean isFullScreen() {
 		return fullScreen;
@@ -202,6 +214,7 @@ public final class GraphicsEngine{
 	private void renderObjects(Graphics2D bufferGraphics) {
 		for(Drawable object : drawableObjects){
 			drawImage(object.getImage(), bufferGraphics, object.getScreenlocationX(), object.getScreenlocationY(), object.getImageAngle(), 1, 1.0f);
+			drawGameObjectCircleBounds(object,bufferGraphics);
 		}	
 	}
 
