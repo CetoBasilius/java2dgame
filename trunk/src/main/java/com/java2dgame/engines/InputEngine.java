@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 
 import org.apache.log4j.Logger;
 
+import com.java2dgame.entities.Controllable;
+
 
 public final class InputEngine {
 	

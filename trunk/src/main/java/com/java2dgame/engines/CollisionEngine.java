@@ -4,11 +4,12 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import com.java2dgame.entities.Collisionable;
+
 public class CollisionEngine {
-	
 	private float lastCollisionDepthX;
 	private float lastCollisionDepthY;
-	private Vector<Collisionable> collisionableObjects = new Vector<Collisionable>(100,100);
+	private Vector<Collisionable> collisionableObjects = new Vector<Collisionable>(100,100);	
 
 	private static class CollisionEngineReferenceHolder {
         private static final CollisionEngine INSTANCE = new CollisionEngine();
@@ -20,7 +21,7 @@ public class CollisionEngine {
 		}
 	}
 	
-	public static CollisionEngine getInstance() {
+	public synchronized static CollisionEngine getInstance() {
         return CollisionEngineReferenceHolder.INSTANCE;
     }
 	
@@ -159,6 +160,7 @@ public class CollisionEngine {
 	}
 	
 	
+	//TODO implement this
 	private void checkAllObjects() {
 		for(Collisionable object : collisionableObjects){
 			//TODO actually check all objects

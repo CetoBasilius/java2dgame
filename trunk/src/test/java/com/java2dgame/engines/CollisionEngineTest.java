@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.java2dgame.app.TestObject;
+import com.java2dgame.entities.TestObject;
 
 
 
