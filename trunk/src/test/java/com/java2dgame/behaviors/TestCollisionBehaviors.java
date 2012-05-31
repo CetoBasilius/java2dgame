@@ -74,4 +74,41 @@ public class TestCollisionBehaviors {
 
 		verify(mock1,mock2);	
 	}
+	
+	@Test
+	public void testUnstoppableCollision(){
+		CollisionBehavior behavior = new CollisionUnstoppableEnergyTransfer();
+		
+		Collisionable mock1 = createMock(Collisionable.class);
+		Collisionable mock2 = createMock(Collisionable.class);
+		
+		expect(mock1.getRadius()).andReturn(8.0f).once();
+		expect(mock2.getRadius()).andReturn(8.0f).once();
+		
+		expect(mock1.isCollisionActive()).andReturn(true).once();
+		expect(mock2.isCollisionActive()).andReturn(true).once();
+		
+		expect(mock1.getWorldPositionX()).andReturn(2.0f).times(2);
+		expect(mock1.getWorldPositionY()).andReturn(0.0f).times(2);
+		expect(mock1.getHorizontalVelocity()).andReturn(-1.0f).once();
+		expect(mock1.getVerticalVelocity()).andReturn(0.0f).once();
+		
+		expect(mock2.getWorldPositionX()).andReturn(-2.0f).times(2);
+		expect(mock2.getWorldPositionY()).andReturn(0.0f).times(2);
+		expect(mock2.getHorizontalVelocity()).andReturn(1.0f).once();
+		expect(mock2.getVerticalVelocity()).andReturn(0.0f).once();
+		
+		
+		mock2.setVelocity(1.0f, 270);
+		expectLastCall().once();
+
+		mock2.updateCollision();
+		expectLastCall().once();
+
+		replay(mock1,mock2);
+
+		behavior.update(mock1, mock2);
+
+		verify(mock1,mock2);	
+	}
 }
