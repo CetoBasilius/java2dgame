@@ -5,6 +5,7 @@ import java.awt.Image;
 
 import com.java2dgame.behaviors.CollisionBehavior;
 import com.java2dgame.behaviors.CollisionDoNothing;
+import com.java2dgame.behaviors.CollisionUnstoppableEnergyTransfer;
 
 public class Laser implements Drawable, Collisionable, Updateable{
 	
@@ -23,7 +24,7 @@ public class Laser implements Drawable, Collisionable, Updateable{
 	private float horizontalVelocity;
 	private float verticalVelocity;
 	private int collisionIndex;
-	private CollisionBehavior collisionBehavior = new CollisionDoNothing();
+	private CollisionBehavior collisionBehavior = new CollisionUnstoppableEnergyTransfer();
 	private int collisionTimer;
 	
 	public Laser(Image image){
