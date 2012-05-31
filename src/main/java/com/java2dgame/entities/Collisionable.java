@@ -5,6 +5,8 @@ import com.java2dgame.behaviors.CollisionBehavior;
 
 public interface Collisionable {
 
+	public boolean isCollisionActive();
+	
 	public float getWorldPositionX();
 	public float getWorldPositionY();
 	
