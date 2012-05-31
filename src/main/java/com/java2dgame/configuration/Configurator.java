@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.java2dgame.helpers.XMLHelper;
+import com.java2dgame.helpers.XmlHelper;
 
 public final class Configurator {
 
@@ -36,8 +36,8 @@ public final class Configurator {
 
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
-				returnDimension.width = Integer.parseInt(XMLHelper.getTagValue("width", eElement));
-				returnDimension.height = Integer.parseInt(XMLHelper.getTagValue("height", eElement));
+				returnDimension.width = Integer.parseInt(XmlHelper.getTagValue("width", eElement));
+				returnDimension.height = Integer.parseInt(XmlHelper.getTagValue("height", eElement));
 			}
 			
 		}catch(Exception e) {
@@ -51,6 +51,6 @@ public final class Configurator {
 	}
 
 	public static void loadConfigurationFile() {
-		configDoc = XMLHelper.loadXMLFile(Configurator.class,CONFIGURATION_FILE);
+		configDoc = XmlHelper.loadXMLFile(Configurator.class,CONFIGURATION_FILE);
 	}
 }

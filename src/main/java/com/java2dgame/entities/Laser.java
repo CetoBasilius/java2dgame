@@ -32,7 +32,7 @@ public class Laser implements Drawable, Collisionable, Updateable{
 		size.width = 8;
 		size.height = 8;
 		
-		collisionTimer = 10;
+		collisionTimer = 8;
 	}
 	
 	@Override

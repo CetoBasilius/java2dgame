@@ -3,7 +3,7 @@ package com.java2dgame.behaviors;
 public class ShootNothing implements ShootBehavior{
 
 	@Override
-	public void shoot(float x, float y, int angle) {
+	public void shoot(float x, float y, int angle, float velocityAdd) {
 		// TODO Auto-generated method stub
 		
 	}

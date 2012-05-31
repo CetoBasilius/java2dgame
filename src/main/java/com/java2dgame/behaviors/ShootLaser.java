@@ -17,19 +17,18 @@ public class ShootLaser implements ShootBehavior{
 	private float laserVelocity = 8.0f;
 
 	@Override
-	public void shoot(float x, float y, int angle) {
+	public void shoot(float x, float y, int angle, float velocityAdd) {
 		if(currentCoolDown == 0) {
 			Image laserImage = Toolkit.getDefaultToolkit().getImage(ResourceLoader.class.getResource("laser1.png"));
-			Laser testObject = new Laser(laserImage);
-			testObject.setWorldPosition(x, y);
-			testObject.setImageAngle(angle);
-			testObject.addForwardVelocity(laserVelocity);
+			Laser laser = new Laser(laserImage);
+			laser.setWorldPosition(x, y);
+			laser.setImageAngle(angle);
+			laser.addForwardVelocity(laserVelocity+velocityAdd);
 
-			GraphicsEngine.getInstance().addDrawableObject(testObject);
-			Game.getInstance().addUpdateableObject(testObject);
-			CollisionEngine.getInstance().addCollisionObject(testObject);
+			GraphicsEngine.getInstance().addDrawableObject(laser);
+			Game.getInstance().addUpdateableObject(laser);
+			CollisionEngine.getInstance().addCollisionObject(laser);
 			startCoolingOff();
-
 		}
 	}
 
