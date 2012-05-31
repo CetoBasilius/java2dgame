@@ -25,11 +25,20 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 	private float verticalVelocity;
 	private int collisionIndex;
 	private CollisionBehavior collisionBehavior = new CollisionEnergyTransfer();
+	private int collisionTimer;
 	
 	public TestObject() {
 		size.height=32;
 		size.width=32;
 		radius = 16;
+	}
+	
+	@Override
+	public boolean isCollisionActive() {
+		if(collisionTimer==0) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
@@ -204,27 +213,27 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 
 	@Override
 	public void holdingUp() {
-		this.setWorldPosition(this.getWorldPositionX(), this.getWorldPositionY()-5);
-		//addVerticalVelocity(0.5f);
+		//this.setWorldPosition(this.getWorldPositionX(), this.getWorldPositionY()-5);
+		addVerticalVelocity(0.5f);
 	}
 
 
 	@Override
 	public void holdingDown() {
-		this.setWorldPosition(this.getWorldPositionX(), this.getWorldPositionY()+5);
-		//addVerticalVelocity(-0.5f);
+//		this.setWorldPosition(this.getWorldPositionX(), this.getWorldPositionY()+5);
+		addVerticalVelocity(-0.5f);
 	}
 
 	@Override
 	public void holdingLeft() {
-		this.setWorldPosition(this.getWorldPositionX()-5, this.getWorldPositionY());
-		//addHorizontalVelocity(-0.5f);
+//		this.setWorldPosition(this.getWorldPositionX()-5, this.getWorldPositionY());
+		addHorizontalVelocity(-0.5f);
 	}
 
 	@Override
 	public void holdingRight() {
-		this.setWorldPosition(this.getWorldPositionX()+5, this.getWorldPositionY());
-		//addHorizontalVelocity(0.5f);
+//		this.setWorldPosition(this.getWorldPositionX()+5, this.getWorldPositionY());
+		addHorizontalVelocity(0.5f);
 	}
 
 

@@ -98,7 +98,8 @@ public final class GraphicsEngine{
 	}
 
 
-	private void setFullScreen(JFrame frame, JPanel panel, Dimension resolution) {
+	private boolean setFullScreen(JFrame frame, JPanel panel, Dimension resolution) {
+		
 		//Set Fullscreen On
 		frame.setVisible(false);
 		frame.dispose();
@@ -111,6 +112,8 @@ public final class GraphicsEngine{
 		panel.setLocation(getWindowCenterPosition(resolution));
 		panel.requestFocus();
 		fullScreen=true;
+		
+		return fullScreen;
 	}
 	
 	public void setTrueFullScreen() {
@@ -160,11 +163,15 @@ public final class GraphicsEngine{
 	}
 	
 	public void toggleFullScreen() {
-		toggleFullScreen(windowReference.frame,windowReference.panel,windowReference.prefferedDimension);
+		if(windowReference!=null) {
+			toggleFullScreen(windowReference.frame,windowReference.panel,windowReference.prefferedDimension);
+		}
 	}
 	
 	public void toggleTrueFullScreen() {
-		toggleTrueFullScreen(windowReference.frame,windowReference.panel,windowReference.prefferedDimension);
+		if(windowReference!=null) {
+			toggleTrueFullScreen(windowReference.frame,windowReference.panel,windowReference.prefferedDimension);
+		}
 	}
 	
 	/**
@@ -213,8 +220,8 @@ public final class GraphicsEngine{
 	private synchronized void renderObjects(Graphics2D bufferGraphics) {
 		for(Drawable object : drawableObjects){
 			drawImage(object.getImage(), bufferGraphics, object.getScreenlocationX(), object.getScreenlocationY(), object.getImageAngle(), 1, 1.0f);
-			//TODO add graphics debug
-			drawGameObjectCircleBounds(object,bufferGraphics);
+			//TODO add graphics debug for true collision engine
+			//drawGameObjectCircleBounds(object,bufferGraphics);
 		}	
 	}
 

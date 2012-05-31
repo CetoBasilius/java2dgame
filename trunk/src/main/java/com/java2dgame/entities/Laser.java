@@ -24,12 +24,23 @@ public class Laser implements Drawable, Collisionable, Updateable{
 	private float verticalVelocity;
 	private int collisionIndex;
 	private CollisionBehavior collisionBehavior = new CollisionDoNothing();
+	private int collisionTimer;
 	
 	public Laser(Image image){
 		this.image = image;
-		radius = 16;
-		size.width = 16;
-		size.height = 16;
+		radius = 4;
+		size.width = 8;
+		size.height = 8;
+		
+		collisionTimer = 10;
+	}
+	
+	@Override
+	public boolean isCollisionActive() {
+		if(collisionTimer==0) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
@@ -200,6 +211,10 @@ public class Laser implements Drawable, Collisionable, Updateable{
 		screenLocationX = (int) worldPositionX;
 		screenLocationY = (int) worldPositionY;
 		
+		if(collisionTimer>0) {
+			collisionTimer--;
+		}
+		
 	}
 
 	@Override
@@ -221,7 +236,6 @@ public class Laser implements Drawable, Collisionable, Updateable{
 		setHorizontalVelocity((float) velocityX);
 		setVerticalVelocity((float) velocityY);	
 	}
-
 	
 
 }

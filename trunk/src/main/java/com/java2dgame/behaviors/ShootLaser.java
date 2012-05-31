@@ -9,9 +9,10 @@ import com.java2dgame.engines.GraphicsEngine;
 import com.java2dgame.entities.Laser;
 import com.java2dgame.resources.ResourceLoader;
 
+
 public class ShootLaser implements ShootBehavior{
 	
-	private static final int LASER_SHOOT_COOLDOWN = 10;
+	private static final int LASER_SHOOT_COOLDOWN = 8;
 	private int currentCoolDown = LASER_SHOOT_COOLDOWN;
 	private float laserVelocity = 8.0f;
 
@@ -28,7 +29,7 @@ public class ShootLaser implements ShootBehavior{
 			Game.getInstance().addUpdateableObject(testObject);
 			CollisionEngine.getInstance().addCollisionObject(testObject);
 			startCoolingOff();
-			
+
 		}
 	}
 
@@ -46,7 +47,5 @@ public class ShootLaser implements ShootBehavior{
 			currentCoolDown = 0;
 		}
 	}
-	
-	
 
 }

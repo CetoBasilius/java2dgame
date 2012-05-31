@@ -20,7 +20,7 @@ public class Application extends JFrame implements MouseMotionListener, MouseLis
 	
 	private static final long serialVersionUID = 1L;
 
-	private Application() {
+	Application() {
 		init();
 	}
 

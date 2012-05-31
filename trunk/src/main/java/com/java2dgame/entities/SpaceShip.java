@@ -30,6 +30,7 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	private double spaceShipAcceleration = 0.5;
 	private int collisionIndex;
 	private CollisionBehavior collisionBehavior = new CollisionEnergyTransfer();
+	private int collisionTimer;
 	
 	public SpaceShip(Image image){
 		this.image = image;
@@ -37,6 +38,15 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		size.width = 64;
 		size.height = 64;
 		shootBehavior = new ShootLaser();
+
+	}
+	
+	@Override
+	public boolean isCollisionActive() {
+		if(collisionTimer==0) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

@@ -76,6 +76,8 @@ public final class Game implements Runnable {
 		addUpdateableObject(spaceShip);
 	}
 
+	
+	//TODO replace this method with actual loading code
 	private void makeTestObject() {
 		for(int a = 0; a<48;a++) {
 			testobject = new TestObject();
