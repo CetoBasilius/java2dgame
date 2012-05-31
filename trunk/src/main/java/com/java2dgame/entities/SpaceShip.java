@@ -197,8 +197,6 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		addHorizontalVelocity((float) velocityX);
 		addVerticalVelocity((float) velocityY);
 	}
-	
-	
 
 	public void brakeForwardVelocity() {
 
@@ -258,7 +256,8 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 
 	@Override
 	public void holdingFire() {
-		shootBehavior.shoot(this.worldPositionX,this.worldPositionY,this.angle);
+		float object1Energy = (float) Math.abs(Math.hypot(this.horizontalVelocity, this.verticalVelocity));
+		shootBehavior.shoot(this.worldPositionX,this.worldPositionY,this.angle,object1Energy);
 	}
 
 	@Override

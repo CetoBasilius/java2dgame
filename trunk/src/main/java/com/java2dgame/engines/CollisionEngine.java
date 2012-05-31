@@ -11,6 +11,7 @@ public class CollisionEngine {
 	private float lastCollisionDepthY;
 	private Vector<Collisionable> collisionableObjects = new Vector<Collisionable>(100,100);	
 
+	//Initialization On Demand Holder
 	private static class CollisionEngineReferenceHolder {
         private static final CollisionEngine INSTANCE = new CollisionEngine();
     }
@@ -21,7 +22,7 @@ public class CollisionEngine {
 		}
 	}
 	
-	public synchronized static CollisionEngine getInstance() {
+	public static CollisionEngine getInstance() {
         return CollisionEngineReferenceHolder.INSTANCE;
     }
 	
