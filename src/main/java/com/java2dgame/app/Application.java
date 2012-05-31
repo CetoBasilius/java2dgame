@@ -20,14 +20,14 @@ public class Application extends JFrame implements MouseMotionListener, MouseLis
 	
 	private static final long serialVersionUID = 1L;
 
-	Application() {
+	public Application() {
 		init();
 	}
 
 	private void init() {
 		initLogger();
 		initConfiguration();
-		initWindow();
+		initWindow(new GameCanvas());
 		Game.startGame();
 	}
 
@@ -35,8 +35,8 @@ public class Application extends JFrame implements MouseMotionListener, MouseLis
 		Configurator.loadConfigurationFile();
 	}
 
-	private void initWindow() {
-		GameCanvas gameCanvas = new GameCanvas();
+	private void initWindow(GameCanvas gameCanvas) {
+		
 		gameCanvas.setPreferredSize(Configurator.getConfigurationResolution());
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
