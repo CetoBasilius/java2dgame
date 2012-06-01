@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Image;
 
 import com.java2dgame.behaviors.CollisionBehavior;
-import com.java2dgame.behaviors.CollisionDoNothing;
 import com.java2dgame.behaviors.CollisionUnstoppableEnergyTransfer;
 
 public class Laser implements Drawable, Collisionable, Updateable{

@@ -18,7 +18,7 @@ public class TestResourceLoader {
 		
 		//replay(xmlHelper);
 		
-		ResourceLoader.getInstance().loadResourceList();
+		//ResourceLoader.getInstance().loadResourceList();
 		
 		//verify(xmlHelper);	
 	}
