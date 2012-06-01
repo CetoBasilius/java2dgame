@@ -3,7 +3,7 @@ package com.java2dgame.entities;
 import com.java2dgame.behaviors.CollisionBehavior;
 
 
-public interface Collisionable {
+public interface Collisionable{
 
 	public boolean isCollisionActive();
 	

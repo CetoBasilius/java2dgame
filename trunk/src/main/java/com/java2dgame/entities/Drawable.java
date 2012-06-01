@@ -2,7 +2,7 @@ package com.java2dgame.entities;
 
 import java.awt.Image;
 
-public interface Drawable {
+public interface Drawable{
 	
 	public int getDrawableAssignedIndex();
 	public void setDrawableAssignedIndex(int index);

@@ -20,9 +20,9 @@ public class Application extends JFrame implements MouseMotionListener, MouseLis
 	
 	private static final long serialVersionUID = 1L;
 
-	public Application() {
-		init();
-	}
+	public Application() {}
+		
+
 
 	private void init() {
 		initLogger();
@@ -53,10 +53,10 @@ public class Application extends JFrame implements MouseMotionListener, MouseLis
 		gameCanvas.addMouseMotionListener(this);	
 		gameCanvas.addMouseListener(this); 
 		gameCanvas.addMouseWheelListener(this);	
-	
+		
 		GraphicsEngine.getInstance().setWindowReference(this, gameCanvas, gameCanvas.getPreferredSize());
+	
 		GraphicsEngine.getInstance().resetWindow();
-
 	}
 
 	private void initLogger() {
@@ -65,7 +65,8 @@ public class Application extends JFrame implements MouseMotionListener, MouseLis
 	}
 
 	public static void main(String [] args) {
-		new Application();
+		Application application = new Application();
+		application.init();
 	}
 	
 	@Override

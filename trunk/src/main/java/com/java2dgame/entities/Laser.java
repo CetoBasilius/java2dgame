@@ -26,6 +26,7 @@ public class Laser implements Drawable, Collisionable, Updateable{
 	private int collisionIndex;
 	private CollisionBehavior collisionBehavior = new CollisionUnstoppableEnergyTransfer();
 	private int collisionTimer;
+	private int objectLife;
 	
 	public Laser(Image image){
 		this.image = image;
@@ -34,8 +35,10 @@ public class Laser implements Drawable, Collisionable, Updateable{
 		size.height = 8;
 		
 		collisionTimer = 8;
+		objectLife = 50;
 	}
 	
+
 	@Override
 	public boolean isCollisionActive() {
 		if(collisionTimer==0) {
@@ -207,6 +210,10 @@ public class Laser implements Drawable, Collisionable, Updateable{
 			angle = 360 -angle;
 		}
 		
+		if(objectLife>0) {
+			objectLife--;
+		}
+		
 		updateCollision();
 		
 		screenLocationX = (int) worldPositionX;
@@ -237,6 +244,8 @@ public class Laser implements Drawable, Collisionable, Updateable{
 		setHorizontalVelocity((float) velocityX);
 		setVerticalVelocity((float) velocityY);	
 	}
+
+	
 	
 
 }

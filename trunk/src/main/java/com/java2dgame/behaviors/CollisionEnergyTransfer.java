@@ -8,7 +8,8 @@ public class CollisionEnergyTransfer implements CollisionBehavior{
 	private static final int HALF_CIRCLE = 180;
 	private static final int FULL_CIRCLE = 360;
 	private final double ENERGY_TRANSFER_RATIO = 0.8;
-	private final double ENERGY_TRANSFER_LOSS_RATIO = 1.0f - ENERGY_TRANSFER_RATIO;
+	private final double ENERGY_TRANSFER_LOSS_RATIO = 0.2;
+
 
 	@Override
 	public void update(Collisionable object1, Collisionable object2) {
