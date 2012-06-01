@@ -41,6 +41,15 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 
 	}
 	
+	public boolean imageIsSquare() {
+		if(image!=null) {
+			if(image.getWidth(null)==image.getHeight(null)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean isCollisionActive() {
 		if(collisionTimer==0) {
