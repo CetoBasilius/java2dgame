@@ -19,7 +19,7 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	private int screenLocationY;
 	private Image image;
 	
-	private Dimension size = new Dimension(64,64);
+	private Dimension size = new Dimension(48,48);
 	private float worldPositionX;
 	private float worldPositionY;
 	
@@ -34,9 +34,9 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	
 	public SpaceShip(Image image){
 		this.image = image;
-		radius = 32;
-		size.width = 64;
-		size.height = 64;
+		radius = 24;
+		size.width = 48;
+		size.height = 48;
 		shootBehavior = new ShootLaser();
 
 	}
@@ -334,7 +334,5 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		setHorizontalVelocity((float) velocityX);
 		setVerticalVelocity((float) velocityY);	
 	}
-
-
 
 }

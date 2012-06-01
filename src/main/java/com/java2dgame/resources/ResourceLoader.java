@@ -11,11 +11,11 @@ import com.java2dgame.helpers.XmlHelper;
 public final class ResourceLoader {
 	
 	private static Document resourceList;
-	private final String RESOURCELIST_FILENAME = "resources.xml";
+	private final static String RESOURCELIST_FILENAME = "resources.xml";
 	
 	private ResourceLoader(){
 		Logger.getLogger(this.getClass()).info("Resource loader started.");
-		loadResourceList();
+		resourceList = loadResourceList();
 	}
 	
 	private static class ResourceLoaderReferenceHolder {
@@ -31,8 +31,8 @@ public final class ResourceLoader {
 		throw new CloneNotSupportedException();
 	}
 	
-	public void loadResourceList(){
-		resourceList = XmlHelper.loadXMLFile(ResourceLoader.class,RESOURCELIST_FILENAME);
+	public static Document loadResourceList(){
+		return XmlHelper.loadXMLFile(ResourceLoader.class,RESOURCELIST_FILENAME);
 	}
 	
 	
@@ -56,5 +56,13 @@ public final class ResourceLoader {
 			e.printStackTrace();
 			Logger.getLogger(ResourceLoader.class).error("There was an error.");
 		}
+	}
+	
+	public Document getResourceList() {
+		return resourceList;
+	}
+
+	public static String getResourcelistFilename() {
+		return RESOURCELIST_FILENAME;
 	}
 }

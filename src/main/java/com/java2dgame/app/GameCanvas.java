@@ -3,6 +3,7 @@ package com.java2dgame.app;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 
 import javax.swing.JPanel;
@@ -55,7 +56,7 @@ public class GameCanvas extends JPanel implements Runnable{
 	public void paint(Graphics graphics){
 		graphics.clearRect(0, 0, preferredSize.width, preferredSize.height);
 		if(bufferGraphics != null){
-			GraphicsEngine.getInstance().update(bufferGraphics, preferredSize.width, preferredSize.height);
+			GraphicsEngine.getInstance().update((Graphics2D)bufferGraphics, preferredSize.width, preferredSize.height);
 			bufferGraphics.setColor(Color.white);
 			bufferGraphics.drawString(String.valueOf(getFPS()), 20, 20);
 		}

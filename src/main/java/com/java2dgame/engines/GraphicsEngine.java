@@ -3,7 +3,6 @@ package com.java2dgame.engines;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
@@ -22,7 +21,7 @@ public final class GraphicsEngine{
 	
 	private static int WINDOW_THICKNESS_Y;
 	private static int WINDOW_THICKNESS_X;
-	private static Dimension desktopDimension = Toolkit.getDefaultToolkit().getScreenSize();
+	private Dimension desktopDimension = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	private Vector<Drawable> drawableObjects = new Vector<Drawable>(100,100);
 	private boolean fullScreen;
@@ -46,11 +45,11 @@ public final class GraphicsEngine{
         return GraphicsEngineReferenceHolder.INSTANCE;
     }
 	
-	public static void updateDesktopDimension() {
+	public void updateDesktopDimension() {
 		desktopDimension = Toolkit.getDefaultToolkit().getScreenSize();
 	}
 
-	private static Point getWindowCenterPosition(Dimension resolution){
+	public Point getWindowCenterPosition(Dimension resolution){
 		int positionX = (int)((desktopDimension.getWidth()/2)-(resolution.getWidth()/2));
 		int positionY = (int)((desktopDimension.getHeight()/2)-(resolution.getHeight()/2));
 		return new Point(positionX,positionY);
@@ -62,9 +61,8 @@ public final class GraphicsEngine{
 	}
 
 	
-	public void update(Graphics bufferGraphicsIn,int width, int height){
+	public void update(Graphics2D bufferGraphics,int width, int height){
 
-		Graphics2D bufferGraphics = (Graphics2D)bufferGraphicsIn;
 		bufferGraphics.setBackground(Color.black);
 		bufferGraphics.clearRect(0, 0, width, height);
 		renderObjects(bufferGraphics);
@@ -188,7 +186,7 @@ public final class GraphicsEngine{
      * @param graphics the Graphics2D on where the image will be drawn.
 	 * 
 	 */
-	public static void drawImage(Image image, Graphics2D graphics, int x, int y, float angle, float scale, float Alpha) {
+	public void drawImage(Image image, Graphics2D graphics, int x, int y, float angle, float scale, float Alpha) {
 
 		graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,Alpha));
 		
@@ -223,6 +221,10 @@ public final class GraphicsEngine{
 			//TODO add graphics debug for true collision engine
 			//drawGameObjectCircleBounds(object,bufferGraphics);
 		}	
+	}
+
+	public Dimension getDesktopDimension() {
+		return desktopDimension;
 	}
 
 	public class WindowContainer{

@@ -1,5 +1,4 @@
 package com.java2dgame.behaviors;
-
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -12,7 +11,7 @@ import com.java2dgame.resources.ResourceLoader;
 
 public class ShootLaser implements ShootBehavior{
 	
-	private static final int LASER_SHOOT_COOLDOWN = 8;
+	private static final int LASER_SHOOT_COOLDOWN = 1;
 	private int currentCoolDown = LASER_SHOOT_COOLDOWN;
 	private float laserVelocity = 8.0f;
 

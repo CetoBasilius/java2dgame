@@ -13,6 +13,8 @@ public class GameKeyAdapter implements KeyListener{
 	boolean enterPressed = false;
 	boolean shiftPressed = false;
 	
+	InputEngine inputEngine = InputEngine.getInstance();
+	GraphicsEngine graphicsEngine = GraphicsEngine.getInstance();
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -28,14 +30,14 @@ public class GameKeyAdapter implements KeyListener{
 			break;
 		}
 		if(altPressed && enterPressed && shiftPressed) {
-			GraphicsEngine.getInstance().toggleTrueFullScreen();
+			graphicsEngine.toggleTrueFullScreen();
 			e.consume();
 		} else {
 			if(altPressed && enterPressed) {
-				GraphicsEngine.getInstance().toggleFullScreen();
+				graphicsEngine.toggleFullScreen();
 				e.consume();
 			} else {
-				InputEngine.getInstance().pressKey(e.getKeyCode());
+				inputEngine.pressKey(e.getKeyCode());
 			}
 		}	
 	}
@@ -55,14 +57,14 @@ public class GameKeyAdapter implements KeyListener{
 		}
 
 		if(altPressed && enterPressed && shiftPressed) {
-			GraphicsEngine.getInstance().toggleTrueFullScreen();
+			graphicsEngine.toggleTrueFullScreen();
 			e.consume();
 		} else {
 			if(altPressed && enterPressed) {
-				GraphicsEngine.getInstance().toggleFullScreen();
+				graphicsEngine.toggleFullScreen();
 				e.consume();
 			} else {
-				InputEngine.getInstance().releaseKey(e.getKeyCode());
+				inputEngine.releaseKey(e.getKeyCode());
 			}
 		}
 	}
