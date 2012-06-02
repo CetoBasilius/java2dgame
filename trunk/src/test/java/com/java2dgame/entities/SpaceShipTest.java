@@ -11,6 +11,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Image;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,6 +23,11 @@ public class SpaceShipTest {
 	private Image mockedImage;
 	private int mockedImageHeight = 32;
 	private int mockedImageWidth = 32;
+	
+	@Before
+	public void disableLogger() {
+		Logger.getRootLogger().setLevel(Level.OFF);
+	}
 	
 	@Before
 	public void makeSpaceShip() {

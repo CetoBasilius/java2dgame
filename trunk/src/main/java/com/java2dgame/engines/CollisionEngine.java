@@ -17,9 +17,7 @@ public class CollisionEngine {
     }
 
 	private CollisionEngine(){
-		if (Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
-			Logger.getLogger(this.getClass()).info("Collision engine started.");
-		}
+		Logger.getLogger(this.getClass()).info("Collision engine started.");
 	}
 	
 	public static CollisionEngine getInstance() {

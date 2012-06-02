@@ -1,20 +1,16 @@
 package com.java2dgame.app;
 
-import java.awt.Dimension;
-
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 
-import com.java2dgame.adapters.GameKeyAdapter;
-import com.java2dgame.configuration.Configurator;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 public class TestApplication {
+	
+	@Before
+	public void disableLogger() {
+		Logger.getRootLogger().setLevel(Level.OFF);
+	}
 	
 	//TODO test this
 	@Test

@@ -16,6 +16,8 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,6 +25,11 @@ import org.junit.Test;
 public class GraphicsEngineTest {
 	
 	GraphicsEngine graphicsEngine;
+	
+	@Before
+	public void disableLogger() {
+		Logger.getRootLogger().setLevel(Level.OFF);
+	}
 	
 	@Before
 	public void initTestGraphicEngine() {

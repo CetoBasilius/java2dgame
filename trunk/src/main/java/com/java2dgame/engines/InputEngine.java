@@ -26,15 +26,13 @@ public final class InputEngine {
 	private InputEngineController inputController = new InputEngineController();
 	private InputRecorder inputRecorder = new InputRecorder();
 	private Controllable controllable;
-	
+
 	private static class InputEngineReferenceHolder {
-        private static final InputEngine INSTANCE = new InputEngine();
-    }
-	
+		private static final InputEngine INSTANCE = new InputEngine();
+	}
+
 	private InputEngine(){
-		if (Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
-			Logger.getLogger(this.getClass()).info("Input engine started.");
-		}
+		Logger.getLogger(this.getClass()).info("Input engine started.");
 	}
 	
 	public static InputEngine getInstance() {

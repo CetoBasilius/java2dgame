@@ -10,12 +10,20 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.event.KeyEvent;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.java2dgame.engines.GraphicsEngine;
 
 public class TestGameKeyAdapter {
 
+	@Before
+	public void disableLogger() {
+		Logger.getRootLogger().setLevel(Level.OFF);
+	}
+	
 	@Test
 	public void testFullscreenCombinationPress() {
 		GameKeyAdapter keyAdapter = new GameKeyAdapter();

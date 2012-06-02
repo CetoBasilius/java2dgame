@@ -1,21 +1,25 @@
 package com.java2dgame.behaviors;
 
-import org.junit.Test;
-
-import org.junit.Test;
-import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.java2dgame.entities.Collisionable;
 
 public class TestCollisionBehaviors {
+	
+	@Before
+	public void disableLogger() {
+		Logger.getRootLogger().setLevel(Level.OFF);
+	}
 
 	@Test
 	public void testEnergyTransferCollision(){
