@@ -39,18 +39,26 @@ public final class Configurator {
 				returnDimension.width = Integer.parseInt(XmlHelper.getTagValue("width", eElement));
 				returnDimension.height = Integer.parseInt(XmlHelper.getTagValue("height", eElement));
 			}
-			
+
 		}catch(Exception e) {
-			e.printStackTrace();
+
 			Logger.getLogger(Configurator.class).warn("There was an error. default values will be used.");
 		}
 
 		Logger.getLogger(Configurator.class).info("Width="+(int)returnDimension.getWidth()+",Height="+(int)returnDimension.getHeight());
-
 		return returnDimension;
 	}
 
 	public static void loadConfigurationFile() {
 		configDoc = XmlHelper.loadXMLFile(Configurator.class,CONFIGURATION_FILE);
 	}
+
+	public static Document getConfigDoc() {
+		return configDoc;
+	}
+
+	public static Dimension getDefaultConfigurationResolution() {
+		return new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+	}
+
 }

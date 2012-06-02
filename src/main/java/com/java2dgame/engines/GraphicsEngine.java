@@ -32,13 +32,7 @@ public final class GraphicsEngine{
     }
 
 	private GraphicsEngine(){
-		logInstance();
-	}
-
-	private void logInstance() {
-		if (Logger.getRootLogger().getAllAppenders().hasMoreElements()) {
-			Logger.getLogger(this.getClass()).info("Graphics engine started.");
-		}
+		Logger.getLogger(this.getClass()).info("Graphics engine started.");
 	}
 	
 	public static GraphicsEngine getInstance() {

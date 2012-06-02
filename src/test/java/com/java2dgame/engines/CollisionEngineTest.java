@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.java2dgame.entities.TestObject;
@@ -11,6 +14,11 @@ import com.java2dgame.entities.TestObject;
 
 
 public class CollisionEngineTest {
+	
+	@Before
+	public void disableLogger() {
+		Logger.getRootLogger().setLevel(Level.OFF);
+	}
 	
 	@Test
 	public void testCircularObjectsCollide(){

@@ -6,12 +6,20 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class XmlHelperTest {
+	
+	@Before
+	public void disableLogger() {
+		Logger.getRootLogger().setLevel(Level.OFF);
+	}
 	
 	@Test
 	public void testGetTagAmount() {
