@@ -15,15 +15,44 @@ import com.java2dgame.entities.TestObject;
 
 public class CollisionEngineTest {
 	
-	@Before
+	CollisionEngine collisionEngine;
+	int delta = 1;
+	
+	
 	public void disableLogger() {
 		Logger.getRootLogger().setLevel(Level.OFF);
 	}
 	
+	@Before
+	public void initEngine() {
+		disableLogger();
+		collisionEngine = CollisionEngine.getInstance();
+	}
+	
+	@Test
+	public void testDistanceBetweenObjectsEdges() {
+		TestObject object1 = new TestObject();
+		TestObject object2 = new TestObject();
+		
+		object1.setSize(100, 100);
+		object2.setSize(100, 100);
+		
+		object1.setWorldPosition(200, 0);
+		object2.setWorldPosition(-100, 0);
+		
+		assertEquals(200,collisionEngine.distanceXBetweenObjectsToEdges(object1, object2),delta);
+		assertEquals(-100,collisionEngine.distanceYBetweenObjectsToEdges(object1, object2),delta);
+
+		object1.setWorldPosition(0, 200);
+		object2.setWorldPosition(0, -100);
+		
+		assertEquals(-100,collisionEngine.distanceXBetweenObjectsToEdges(object1, object2),delta);
+		assertEquals(200,collisionEngine.distanceYBetweenObjectsToEdges(object1, object2),delta);
+
+	}
+	
 	@Test
 	public void testCircularObjectsCollide(){
-		CollisionEngine collisionEngine = CollisionEngine.getInstance();
-		
 		
 		TestObject object1 = new TestObject();
 		TestObject object2 = new TestObject();
@@ -63,16 +92,12 @@ public class CollisionEngineTest {
 	
 	@Test
 	public void testSquareAndCircularSpecialCase() {
-		CollisionEngine collisionEngine = CollisionEngine.getInstance();
-
 
 		TestObject object1 = new TestObject();
 		TestObject object2 = new TestObject();
 		
 		object1.setSize(50);
 		object2.setSize(50);
-		
-		int delta = 1;
 		
 		assertEquals(100.0f,object1.getSizeHeight(),delta);
 		assertEquals(100.0f,object1.getSizeWidth(),delta);
@@ -87,8 +112,6 @@ public class CollisionEngineTest {
 
 	@Test
 	public void testSquareObjectsCollide(){
-		CollisionEngine collisionEngine = CollisionEngine.getInstance();
-		
 		
 		TestObject object1 = new TestObject();
 		TestObject object2 = new TestObject();
@@ -125,8 +148,7 @@ public class CollisionEngineTest {
 	
 	@Test
 	public void testDistanceBetweenObjects(){
-		CollisionEngine collisionEngine = CollisionEngine.getInstance();
-
+		
 		TestObject object1 = new TestObject();
 		TestObject object2 = new TestObject();
 
@@ -136,8 +158,7 @@ public class CollisionEngineTest {
 		object1.setWorldPosition(100,100);
 		object2.setWorldPosition(500,500);
 		
-		int delta = 1;
-		
+
 		assertEquals(300,collisionEngine.distanceXBetweenObjectsToEdges(object1, object2),delta);
 		assertEquals(300,collisionEngine.distanceYBetweenObjectsToEdges(object1, object2),delta);
 		assertEquals(424,collisionEngine.distanceBetweenObjectsEdges(object1, object2),delta);
