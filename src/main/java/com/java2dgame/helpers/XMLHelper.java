@@ -12,6 +12,7 @@ import org.w3c.dom.NodeList;
 
 public class XmlHelper {
 
+	
 	public static Document loadXMLFile(Class<?> classCaller,String fileName) {
 		Document returnDocument = null;
 		try {

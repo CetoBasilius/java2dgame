@@ -16,6 +16,7 @@ import org.w3c.dom.NodeList;
 
 public class XmlHelperTest {
 	
+	
 	@Before
 	public void disableLogger() {
 		Logger.getRootLogger().setLevel(Level.OFF);
