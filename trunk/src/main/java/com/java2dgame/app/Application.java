@@ -19,44 +19,55 @@ import com.java2dgame.engines.GraphicsEngine;
 public class Application extends JFrame implements MouseMotionListener, MouseListener, MouseWheelListener{
 	
 	private static final long serialVersionUID = 1L;
+	private GameCanvas gameCanvas;
 
 	public Application() {}
-		
 
+	public void init() {
+		prepareBasics();	
+		Game.startGame();
+	}
 
-	private void init() {
+	private void prepareBasics() {
 		initLogger();
 		initConfiguration();
-		initWindow(new GameCanvas());
-		Game.startGame();
+		
+		gameCanvas = new GameCanvas();	
+		joinWindowAndCanvas();
+		initWindow();
+		initCanvas(gameCanvas,new GameKeyAdapter());
+		initGraphics();
+	}
+
+	public void joinWindowAndCanvas() {
+		this.getContentPane().add(gameCanvas);
+	}
+
+	private void initGraphics() {
+		GraphicsEngine.getInstance().setWindowReference(this, gameCanvas, gameCanvas.getPreferredSize());
+		GraphicsEngine.getInstance().resetWindow();
 	}
 
 	private void initConfiguration() {
 		Configurator.loadConfigurationFile();
 	}
+	
+	public void initCanvas(GameCanvas canvas,GameKeyAdapter gameKeyAdapter) {
+		canvas.setPreferredSize(Configurator.getConfigurationResolution());
+		canvas.createBufferGraphics();
+		canvas.addKeyListener(gameKeyAdapter);
+		canvas.addMouseMotionListener(this);	
+		canvas.addMouseListener(this); 
+		canvas.addMouseWheelListener(this);		
+	}
 
-	private void initWindow(GameCanvas gameCanvas) {
-		
-		gameCanvas.setPreferredSize(Configurator.getConfigurationResolution());
-		
+	public void initWindow() {	
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(this.getClass().getSimpleName()+" "+serialVersionUID);
-		this.getContentPane().add(gameCanvas);
-		this.pack();
 		this.setLayout(null);
 		this.getContentPane().setBackground(Color.darkGray);
 		this.setVisible(true);
 		this.setResizable(false);
-		
-		gameCanvas.createBufferGraphics();
-		gameCanvas.addKeyListener(new GameKeyAdapter());
-		gameCanvas.addMouseMotionListener(this);	
-		gameCanvas.addMouseListener(this); 
-		gameCanvas.addMouseWheelListener(this);	
-		
-		GraphicsEngine.getInstance().setWindowReference(this, gameCanvas, gameCanvas.getPreferredSize());
-	
-		GraphicsEngine.getInstance().resetWindow();
 	}
 
 	private void initLogger() {
@@ -107,5 +118,15 @@ public class Application extends JFrame implements MouseMotionListener, MouseLis
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 		
+	}
+
+
+
+	public GameCanvas getGameCanvas() {
+		return gameCanvas;
+	}
+
+	public void setGameCanvas(GameCanvas gameCanvas) {
+		this.gameCanvas = gameCanvas;
 	}
 }
