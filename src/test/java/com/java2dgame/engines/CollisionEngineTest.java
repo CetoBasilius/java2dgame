@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.java2dgame.entities.TestObject;
+import com.java2dgame.entities.Asteroid;
 
 
 
@@ -31,8 +31,8 @@ public class CollisionEngineTest {
 	
 	@Test
 	public void testDistanceBetweenObjectsEdges() {
-		TestObject object1 = new TestObject();
-		TestObject object2 = new TestObject();
+		Asteroid object1 = new Asteroid();
+		Asteroid object2 = new Asteroid();
 		
 		object1.setSize(100, 100);
 		object2.setSize(100, 100);
@@ -54,8 +54,8 @@ public class CollisionEngineTest {
 	@Test
 	public void testCircularObjectsCollide(){
 		
-		TestObject object1 = new TestObject();
-		TestObject object2 = new TestObject();
+		Asteroid object1 = new Asteroid();
+		Asteroid object2 = new Asteroid();
 		
 		object1.setSize(100);
 		object2.setSize(100);
@@ -93,8 +93,8 @@ public class CollisionEngineTest {
 	@Test
 	public void testSquareAndCircularSpecialCase() {
 
-		TestObject object1 = new TestObject();
-		TestObject object2 = new TestObject();
+		Asteroid object1 = new Asteroid();
+		Asteroid object2 = new Asteroid();
 		
 		object1.setSize(50);
 		object2.setSize(50);
@@ -113,8 +113,8 @@ public class CollisionEngineTest {
 	@Test
 	public void testSquareObjectsCollide(){
 		
-		TestObject object1 = new TestObject();
-		TestObject object2 = new TestObject();
+		Asteroid object1 = new Asteroid();
+		Asteroid object2 = new Asteroid();
 		
 		object1.setSize(100,100);
 		object2.setSize(100,100);
@@ -149,8 +149,8 @@ public class CollisionEngineTest {
 	@Test
 	public void testDistanceBetweenObjects(){
 		
-		TestObject object1 = new TestObject();
-		TestObject object2 = new TestObject();
+		Asteroid object1 = new Asteroid();
+		Asteroid object2 = new Asteroid();
 
 		object1.setSize(100,100);
 		object2.setSize(100,100);

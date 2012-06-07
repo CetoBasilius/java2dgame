@@ -2,6 +2,7 @@ package com.java2dgame.configuration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -19,6 +20,13 @@ public class TestConfigurator {
 	public void testDefaultResolutionConfigurator(){
 		assertNotNull(Configurator.getConfigurationResolution());
 		assertEquals(Configurator.getDefaultConfigurationResolution(),Configurator.getConfigurationResolution());
+	}
+	
+	@Test
+	public void testGetResolutionConfigurator(){
+		Configurator.loadConfigurationFile();
+		assertNotNull(Configurator.getConfigurationResolution());
+		assertNotSame(Configurator.getDefaultConfigurationResolution(),Configurator.getConfigurationResolution());
 	}
 	
 	@Test

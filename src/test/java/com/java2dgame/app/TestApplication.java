@@ -39,13 +39,10 @@ public class TestApplication {
 		mockedCanvas.addMouseWheelListener(application);
 		expectLastCall().once();
 		
-
 		replay(mockedCanvas);
 		
 		application.initCanvas(mockedCanvas,gameKeyAdapter);
 		
 		verify(mockedCanvas);
-		
 	}
-
 }

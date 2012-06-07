@@ -14,6 +14,7 @@ public final class Configurator {
 
 	private static final int DEFAULT_WIDTH = 640;
 	private static final int DEFAULT_HEIGHT = 480;
+	private static Dimension defaultDimension = new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT);
 	private static final String CONFIGURATION_FILE = "configuration.xml";
 	
 	private static Document configDoc;
@@ -27,15 +28,14 @@ public final class Configurator {
 
 	public static Dimension getConfigurationResolution() {
 		
-		Dimension returnDimension = new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT);
-
+		Dimension returnDimension = defaultDimension;
 		try {
-
 			NodeList nList = configDoc.getElementsByTagName("window");
 			Node nNode = nList.item(0);
 
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
+				returnDimension = new Dimension();
 				returnDimension.width = Integer.parseInt(XmlHelper.getTagValue("width", eElement));
 				returnDimension.height = Integer.parseInt(XmlHelper.getTagValue("height", eElement));
 			}
@@ -58,7 +58,7 @@ public final class Configurator {
 	}
 
 	public static Dimension getDefaultConfigurationResolution() {
-		return new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		return defaultDimension;
 	}
 
 }

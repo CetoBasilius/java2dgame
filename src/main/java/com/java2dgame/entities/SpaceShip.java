@@ -13,8 +13,7 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	
 	private int radius;
 	private int angle;
-	private int assirgnedUpdateIndex;
-	private int assignedDrawableIndex;
+	
 	private int screenLocationX;
 	private int screenLocationY;
 	private Image image;
@@ -28,7 +27,7 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	
 	private ShootBehavior shootBehavior;
 	private double spaceShipAcceleration = 0.5;
-	private int collisionIndex;
+	
 	private CollisionBehavior collisionBehavior = new CollisionEnergyTransfer();
 	private int collisionTimer;
 	
@@ -62,28 +61,7 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	public CollisionBehavior getCollisionBehavior() {
 		return collisionBehavior;
 	}
-	
-	
-	@Override
-	public int getCollisionAssignedIndex() {
-		return collisionIndex;
-	}
 
-	@Override
-	public void setCollisionAssignedIndex(int index) {
-		collisionIndex = index;
-	}
-	
-	@Override
-	public void setUpdateAssignedIndex(int index) {
-		assirgnedUpdateIndex = index;
-	}
-
-	@Override
-	public int getUpdateAssignedIndex() {
-		return assirgnedUpdateIndex;
-	}
-	
 
 	public void setImage(Image image) {
 		this.image = image;
@@ -136,16 +114,6 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 	@Override
 	public float getSizeHeight() {
 		return size.height;
-	}
-
-	@Override
-	public int getDrawableAssignedIndex() {
-		return assignedDrawableIndex;
-	}
-
-	@Override
-	public void setDrawableAssignedIndex(int index) {
-		assignedDrawableIndex = index;
 	}
 
 	@Override
@@ -342,6 +310,16 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 
 		setHorizontalVelocity((float) velocityX);
 		setVerticalVelocity((float) velocityY);	
+	}
+
+	@Override
+	public int getLife() {
+		return 5;
+	}
+
+	@Override
+	public void setLife(int life) {
+		
 	}
 
 }

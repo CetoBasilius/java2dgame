@@ -1,6 +1,6 @@
 package com.java2dgame.entities;
 
-public interface Controllable {
+public interface Controllable extends Perishable{
 	
 	public void holdingUp();
 	public void holdingDown();

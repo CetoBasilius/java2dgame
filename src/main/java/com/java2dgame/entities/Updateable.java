@@ -1,9 +1,7 @@
 package com.java2dgame.entities;
 
-public interface Updateable {
+public interface Updateable extends Perishable{
 
 	public void update();
-	public void setUpdateAssignedIndex(int index);
-	public int getUpdateAssignedIndex();
 
 }

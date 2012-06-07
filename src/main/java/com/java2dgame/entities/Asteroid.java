@@ -7,12 +7,11 @@ import com.java2dgame.behaviors.CollisionBehavior;
 import com.java2dgame.behaviors.CollisionEnergyTransfer;
 
 
-public class TestObject implements Drawable, Controllable, Collisionable, Updateable{
+public class Asteroid implements Drawable, Controllable, Collisionable, Updateable{
 	
 	private int radius;
 	private int angle;
-	private int assignedUpdateIndex;
-	private int assignedDrawIndex;
+
 	private int screenLocationX;
 	private int screenLocationY;
 	private Image image;
@@ -23,11 +22,12 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 	
 	private float horizontalVelocity;
 	private float verticalVelocity;
-	private int collisionIndex;
+
 	private CollisionBehavior collisionBehavior = new CollisionEnergyTransfer();
 	private int collisionTimer;
+	private int life = 5;
 	
-	public TestObject() {
+	public Asteroid() {
 		size.height=32;
 		size.width=32;
 		radius = 16;
@@ -46,30 +46,11 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 		return collisionBehavior;
 	}
 	
-	
-	@Override
-	public int getCollisionAssignedIndex() {
-		return collisionIndex;
-	}
-
-	@Override
-	public void setCollisionAssignedIndex(int index) {
-		collisionIndex = index;
-	}
-	
 	public void setImage(Image image) {
 		this.image = image;
 	}
 	
-	@Override
-	public void setUpdateAssignedIndex(int index) {
-		assignedUpdateIndex = index;
-	}
 
-	@Override
-	public int getUpdateAssignedIndex() {
-		return assignedUpdateIndex;
-	}
 	
 	@Override
 	public int getImageAngle() {
@@ -134,15 +115,7 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 		return size.height;
 	}
 
-	@Override
-	public int getDrawableAssignedIndex() {
-		return assignedDrawIndex;
-	}
 
-	@Override
-	public void setDrawableAssignedIndex(int index) {
-		assignedDrawIndex = index;
-	}
 
 	@Override
 	public Image getImage() {
@@ -316,6 +289,16 @@ public class TestObject implements Drawable, Controllable, Collisionable, Update
 
 		setHorizontalVelocity((float) velocityX);
 		setVerticalVelocity((float) velocityY);	
+	}
+
+	@Override
+	public int getLife() {
+		return life ;
+	}
+	
+	@Override
+	public void setLife(int life) {
+		this.life = life;	
 	}
 
 }
