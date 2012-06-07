@@ -63,14 +63,9 @@ public final class GraphicsEngine{
 	}
 
 	public synchronized void addDrawableObject(Drawable object){
-		object.setDrawableAssignedIndex(drawableObjects.size());
 		drawableObjects.add(object);
 	}
-	
-	public synchronized void removeDrawableObject(Drawable object){
-		drawableObjects.removeElementAt(object.getDrawableAssignedIndex());
-	}
-	
+
 	public void toggleFullScreen(JFrame frame, JPanel panel, Dimension resolution) {
 		
 		if(fullScreen==false) {
@@ -210,10 +205,16 @@ public final class GraphicsEngine{
 	}
 	
 	private synchronized void renderObjects(Graphics2D bufferGraphics) {
-		for(Drawable object : drawableObjects){
-			drawImage(object.getImage(), bufferGraphics, object.getScreenlocationX(), object.getScreenlocationY(), object.getImageAngle(), 1, 1.0f);
-			//TODO add graphics debug for true collision engine
-			//drawGameObjectCircleBounds(object,bufferGraphics);
+		for(int index = 0;index<drawableObjects.size();index++){
+			Drawable object = drawableObjects.get(index);
+			if(object.getLife()!=0) {
+				drawImage(object.getImage(), bufferGraphics, object.getScreenlocationX(), object.getScreenlocationY(), object.getImageAngle(), 1, 1.0f);
+				bufferGraphics.drawString(""+object.getLife(), object.getScreenlocationX(), object.getScreenlocationY());
+			}
+			else {
+				drawableObjects.removeElementAt(index);
+				index--;
+			}
 		}	
 	}
 

@@ -3,7 +3,7 @@ package com.java2dgame.behaviors;
 import com.java2dgame.engines.CollisionEngine;
 import com.java2dgame.entities.Collisionable;
 
-public class CollisionUnstoppableEnergyTransfer implements CollisionBehavior{
+public class CollisionETDestroy implements CollisionBehavior{
 
 	private static final int HALF_CIRCLE = 180;
 	private static final int FULL_CIRCLE = 360;
@@ -34,7 +34,8 @@ public class CollisionUnstoppableEnergyTransfer implements CollisionBehavior{
 					
 					object2.setVelocity((float)(object2Energy*getEnergyTransferLossRatio()+object1Energy*getEnergyTransferRatio()),(int)angleBetweenBothObjects - HALF_CIRCLE);
 					object2.updateCollision();
-
+					
+					object1.setLife(0);
 				}
 			}
 		}

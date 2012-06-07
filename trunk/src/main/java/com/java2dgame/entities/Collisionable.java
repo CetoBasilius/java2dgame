@@ -3,7 +3,7 @@ package com.java2dgame.entities;
 import com.java2dgame.behaviors.CollisionBehavior;
 
 
-public interface Collisionable{
+public interface Collisionable extends Perishable{
 
 	public boolean isCollisionActive();
 	
@@ -26,9 +26,6 @@ public interface Collisionable{
 	public void setWorldPosition(float x, float y);
 	
 	public float getRadius();
-	
-	public int getCollisionAssignedIndex();
-	public void setCollisionAssignedIndex(int index);
 	
 	public CollisionBehavior getCollisionBehavior();
 	

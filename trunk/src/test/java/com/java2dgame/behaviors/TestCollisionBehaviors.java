@@ -81,7 +81,7 @@ public class TestCollisionBehaviors {
 	
 	@Test
 	public void testUnstoppableCollision(){
-		CollisionBehavior behavior = new CollisionUnstoppableEnergyTransfer();
+		CollisionBehavior behavior = new CollisionETDestroy();
 		
 		Collisionable mock1 = createMock(Collisionable.class);
 		Collisionable mock2 = createMock(Collisionable.class);

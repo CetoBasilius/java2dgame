@@ -4,14 +4,14 @@ import java.awt.Dimension;
 import java.awt.Image;
 
 import com.java2dgame.behaviors.CollisionBehavior;
-import com.java2dgame.behaviors.CollisionUnstoppableEnergyTransfer;
+import com.java2dgame.behaviors.CollisionETDestroy;
 
 public class Laser implements Drawable, Collisionable, Updateable{
 	
+	private int life = 200;
 	private int radius;
 	private int angle;
-	private int assirgnedUpdateIndex;
-	private int assignedDrawableIndex;
+
 	private int screenLocationX;
 	private int screenLocationY;
 	private Image image;
@@ -22,10 +22,9 @@ public class Laser implements Drawable, Collisionable, Updateable{
 	
 	private float horizontalVelocity;
 	private float verticalVelocity;
-	private int collisionIndex;
-	private CollisionBehavior collisionBehavior = new CollisionUnstoppableEnergyTransfer();
+
+	private CollisionBehavior collisionBehavior = new CollisionETDestroy();
 	private int collisionTimer;
-	private int objectLife;
 	
 	public Laser(Image image){
 		this.image = image;
@@ -33,8 +32,8 @@ public class Laser implements Drawable, Collisionable, Updateable{
 		size.width = 8;
 		size.height = 8;
 		
-		collisionTimer = 8;
-		objectLife = 50;
+		collisionTimer = 4;
+
 	}
 	
 
@@ -50,17 +49,6 @@ public class Laser implements Drawable, Collisionable, Updateable{
 	public CollisionBehavior getCollisionBehavior() {
 		return collisionBehavior;
 	}
-	
-	@Override
-	public void setUpdateAssignedIndex(int index) {
-		assirgnedUpdateIndex = index;
-	}
-
-	@Override
-	public int getUpdateAssignedIndex() {
-		return assirgnedUpdateIndex;
-	}
-	
 
 	public void setImage(Image image) {
 		this.image = image;
@@ -116,15 +104,7 @@ public class Laser implements Drawable, Collisionable, Updateable{
 		return size.height;
 	}
 
-	@Override
-	public int getDrawableAssignedIndex() {
-		return assignedDrawableIndex;
-	}
 
-	@Override
-	public void setDrawableAssignedIndex(int index) {
-		assignedDrawableIndex = index;
-	}
 
 	@Override
 	public Image getImage() {
@@ -209,10 +189,6 @@ public class Laser implements Drawable, Collisionable, Updateable{
 			angle = 360 -angle;
 		}
 		
-		if(objectLife>0) {
-			objectLife--;
-		}
-		
 		updateCollision();
 		
 		screenLocationX = (int) worldPositionX;
@@ -222,17 +198,12 @@ public class Laser implements Drawable, Collisionable, Updateable{
 			collisionTimer--;
 		}
 		
+		if(life>0) {
+			life--;
+		}
+		
 	}
 
-	@Override
-	public int getCollisionAssignedIndex() {
-		return collisionIndex;
-	}
-
-	@Override
-	public void setCollisionAssignedIndex(int index) {
-		collisionIndex = index;
-	}
 
 	@Override
 	public void setVelocity(float velocity, int angle) {
@@ -244,7 +215,17 @@ public class Laser implements Drawable, Collisionable, Updateable{
 		setVerticalVelocity((float) velocityY);	
 	}
 
-	
-	
+
+	@Override
+	public int getLife() {
+		return life;
+	}
+
+
+	@Override
+	public void setLife(int ilife) {
+		this.life = ilife;	
+		System.out.println("delete");
+	}
 
 }

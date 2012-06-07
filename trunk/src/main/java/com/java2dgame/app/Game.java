@@ -10,7 +10,7 @@ import com.java2dgame.engines.CollisionEngine;
 import com.java2dgame.engines.GraphicsEngine;
 import com.java2dgame.engines.InputEngine;
 import com.java2dgame.entities.SpaceShip;
-import com.java2dgame.entities.TestObject;
+import com.java2dgame.entities.Asteroid;
 import com.java2dgame.entities.Updateable;
 import com.java2dgame.resources.ResourceLoader;
 
@@ -22,7 +22,7 @@ public final class Game implements Runnable {
 	private Vector<Updateable> updateableObjects = new Vector<Updateable>(100,100);	
 
 	//TODO remove this, its a test
-	TestObject testobject;
+	Asteroid testobject;
 	SpaceShip spaceShip;
 	
 
@@ -80,9 +80,11 @@ public final class Game implements Runnable {
 	//TODO replace this method with actual loading code
 	private void makeTestObject() {
 		for(int a = 0; a<48;a++) {
-			testobject = new TestObject();
-			testobject.setImage(Toolkit.getDefaultToolkit().getImage(ResourceLoader.class.getResource("testimage.jpg")));
+			testobject = new Asteroid();
+			testobject.setImage(Toolkit.getDefaultToolkit().getImage(ResourceLoader.class.getResource("testimage.png")));
 			testobject.setWorldPosition((float)(0+(Math.random()*800)), (float)(0+(Math.random()*600)));
+			testobject.setImageAngle((int)(Math.random()*360));
+			testobject.setVelocity((float)(Math.random())*0.5f, (int)(Math.random()*360));
 
 			GraphicsEngine.getInstance().addDrawableObject(testobject);
 			InputEngine.getInstance().setControllableObject(testobject);
@@ -106,13 +108,9 @@ public final class Game implements Runnable {
 	}
 	
 	public void addUpdateableObject(Updateable object) {
-		object.setUpdateAssignedIndex(updateableObjects.size());
 		updateableObjects.add(object);
 	}
-	
-	public void removeUpdateableObject(Updateable object){
-		updateableObjects.removeElementAt(object.getUpdateAssignedIndex());
-	}
+
 	
 	private void gameLoop(){
 		Logger.getLogger(this.getClass()).info("Main loop started.");

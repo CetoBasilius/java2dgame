@@ -6,6 +6,7 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -52,7 +53,7 @@ public class GraphicsEngineTest {
 	@Test
 	public void testUnclonability() {
 		try {
-			assertEquals(new CloneNotSupportedException(),graphicsEngine.clone());
+			assertSame(new CloneNotSupportedException(),graphicsEngine.clone());
 		} catch (CloneNotSupportedException e) {}
 	}
 	
