@@ -2,13 +2,12 @@ package com.java2dgame.configuration;
 
 import java.awt.Dimension;
 
+import com.java2dgame.helpers.XmlReadHelper;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import com.java2dgame.helpers.XmlHelper;
 
 public final class Configurator {
 
@@ -36,8 +35,8 @@ public final class Configurator {
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				returnDimension = new Dimension();
-				returnDimension.width = Integer.parseInt(XmlHelper.getTagValue("width", eElement));
-				returnDimension.height = Integer.parseInt(XmlHelper.getTagValue("height", eElement));
+				returnDimension.width = Integer.parseInt(XmlReadHelper.getTagValue("width", eElement));
+				returnDimension.height = Integer.parseInt(XmlReadHelper.getTagValue("height", eElement));
 			}
 
 		}catch(Exception e) {
@@ -50,7 +49,7 @@ public final class Configurator {
 	}
 
 	public static void loadConfigurationFile() {
-		configDoc = XmlHelper.loadXMLFile(Configurator.class,CONFIGURATION_FILE);
+		configDoc = XmlReadHelper.loadXMLFile(Configurator.class, CONFIGURATION_FILE);
 	}
 
 	public static Document getConfigDoc() {

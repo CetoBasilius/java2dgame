@@ -162,7 +162,7 @@ public class CollisionEngine {
 		collisionableObjects.add(object);
 	}
 	
-	//TODO implement this
+
 	private synchronized void checkAllObjects() {
 		for(int index = collisionableObjects.size()-1;index>0;index--){
 			Collisionable object = collisionableObjects.get(index);

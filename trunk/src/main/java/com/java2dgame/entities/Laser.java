@@ -224,8 +224,7 @@ public class Laser implements Drawable, Collisionable, Updateable{
 
 	@Override
 	public void setLife(int ilife) {
-		this.life = ilife;	
-		System.out.println("delete");
+		this.life = ilife;
 	}
 
 }

@@ -203,20 +203,19 @@ public final class GraphicsEngine{
 	public void setWindowReference(JFrame frame,JPanel panel,Dimension dimension) {
 		windowReference = new WindowContainer(frame,panel,dimension);
 	}
-	
-	private synchronized void renderObjects(Graphics2D bufferGraphics) {
-		for(int index = 0;index<drawableObjects.size();index++){
-			Drawable object = drawableObjects.get(index);
-			if(object.getLife()!=0) {
-				drawImage(object.getImage(), bufferGraphics, object.getScreenlocationX(), object.getScreenlocationY(), object.getImageAngle(), 1, 1.0f);
-				bufferGraphics.drawString(""+object.getLife(), object.getScreenlocationX(), object.getScreenlocationY());
-			}
-			else {
-				drawableObjects.removeElementAt(index);
-				index--;
-			}
-		}	
-	}
+
+    private synchronized void renderObjects(Graphics2D bufferGraphics) {
+        for(int index = drawableObjects.size()-1;index>0;index--){
+            Drawable object = drawableObjects.get(index);
+            if(object.getLife()!=0) {
+                drawImage(object.getImage(), bufferGraphics, object.getScreenlocationX(), object.getScreenlocationY(), object.getImageAngle(), 1, 1.0f);
+                bufferGraphics.drawString(""+object.getLife(), object.getScreenlocationX(), object.getScreenlocationY());
+            }
+            else {
+                drawableObjects.removeElementAt(index);
+            }
+        }
+    }
 
 	public Dimension getDesktopDimension() {
 		return desktopDimension;
