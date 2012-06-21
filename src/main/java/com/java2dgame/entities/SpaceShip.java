@@ -175,8 +175,20 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 		addVerticalVelocity((float) velocityY);
 	}
 
-	public void brakeForwardVelocity() {
-
+	public void brakeVelocity() {
+		if(this.getVerticalVelocity()>0){
+			this.addVerticalVelocity(-0.1f);
+		}
+		if(this.getVerticalVelocity()<0){
+			this.addVerticalVelocity(0.1f);
+		}
+		
+		if(this.getHorizontalVelocity()>0){
+			this.addHorizontalVelocity(-0.1f);
+		}
+		if(this.getHorizontalVelocity()<0){
+			this.addHorizontalVelocity(0.1f);
+		}
 	}
 
 	@Override
@@ -217,7 +229,7 @@ public class SpaceShip implements Drawable, Controllable, Collisionable, Updatea
 
 	@Override
 	public void holdingDown() {
-		brakeForwardVelocity();
+		brakeVelocity();
 	}
 
 	@Override
