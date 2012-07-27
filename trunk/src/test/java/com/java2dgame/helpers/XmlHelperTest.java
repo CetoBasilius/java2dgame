@@ -14,7 +14,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class XmlReadHelperTest {
+public class XmlHelperTest {
 	
 	
 	@Before
@@ -31,7 +31,7 @@ public class XmlReadHelperTest {
 		expect(nodeList.getLength()).andReturn(5);	
 		replay(element,nodeList);
 		
-		assertEquals(5, XmlReadHelper.getTagAmount("tag", element));
+		assertEquals(5, XmlHelper.getTagAmount("tag", element));
 		
 		verify(element,nodeList);	
 	}
@@ -51,7 +51,7 @@ public class XmlReadHelperTest {
 		expect(resultingNode.getNodeValue()).andReturn("hello");
 		replay(element,nodeList,node,childNodeList,resultingNode);
 		
-		assertEquals("hello", XmlReadHelper.getTagValue("tag", element));
+		assertEquals("hello", XmlHelper.getTagValue("tag", element));
 		
 		verify(element,nodeList,node,childNodeList,resultingNode);
 
@@ -74,7 +74,7 @@ public class XmlReadHelperTest {
 		expect(resultingNode.getNodeValue()).andReturn("hello");
 		replay(element,nodeList,node,childNodeList,resultingNode);
 		
-		assertEquals("hello", XmlReadHelper.getTagValue("tag", element, index));
+		assertEquals("hello", XmlHelper.getTagValue("tag", element, index));
 		
 		verify(element,nodeList,node,childNodeList,resultingNode);
 
