@@ -1,6 +1,6 @@
 package com.java2dgame.resources;
 
-import com.java2dgame.helpers.XmlReadHelper;
+import com.java2dgame.helpers.XmlHelper;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -31,7 +31,7 @@ public final class ResourceLoader {
 	}
 	
 	public static Document loadResourceList(){
-		return XmlReadHelper.loadXMLFile(ResourceLoader.class, RESOURCELIST_FILENAME);
+		return XmlHelper.loadXMLFile(ResourceLoader.class, RESOURCELIST_FILENAME);
 	}
 	
 	
@@ -43,11 +43,11 @@ public final class ResourceLoader {
 
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
-				int numberOfImages = XmlReadHelper.getTagAmount("image", eElement);
+				int numberOfImages = XmlHelper.getTagAmount("image", eElement);
 				Logger.getLogger(ResourceLoader.class).info(("There are "+numberOfImages+" images to load."));
 				for(int a = 0;a<numberOfImages;a++) {
 					//TODO actually load images here
-					XmlReadHelper.getTagValue("image", eElement, a);
+					XmlHelper.getTagValue("image", eElement, a);
 				}
 			}
 
